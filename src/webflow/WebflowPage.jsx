@@ -4,7 +4,27 @@ import { useNavigate } from 'react-router-dom'
 function withNavBridge(html) {
   const injectedCss = `
     <style>
-      html, body { overflow-x: hidden !important; }
+      html, body { overflow-x: clip !important; }
+      
+      /* Make Skilled Team center column sticky */
+      @media (min-width: 768px) {
+        .team-one-grid {
+          align-items: start !important;
+          overflow: visible !important;
+        }
+        .team-wrap, .section-gap, .w-container {
+          overflow: visible !important;
+        }
+        .team-one-center-column {
+          position: -webkit-sticky !important;
+          position: sticky !important;
+          top: 35vh !important;
+          height: auto !important;
+          align-self: start !important;
+          z-index: 10;
+        }
+      }
+
       /* Remove Webflow "Made in Webflow" badge */
       .w-webflow-badge, .webflow-badge, [data-wf-badge], .w-webflow-privacy-badge {
         display: none !important;
