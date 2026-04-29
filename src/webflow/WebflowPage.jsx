@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getWebflowThemeCssForIframe } from '../theme.js'
 
 function withNavBridge(html) {
   const injectedCss = `
     <style>
-      html, body { overflow-x: hidden !important; }
+      ${getWebflowThemeCssForIframe()}
+      html, body { overflow-x: clip !important; }
       /* Remove Webflow "Made in Webflow" badge */
       .w-webflow-badge, .webflow-badge, [data-wf-badge], .w-webflow-privacy-badge {
         display: none !important;
