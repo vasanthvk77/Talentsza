@@ -54,15 +54,22 @@ body {
   margin: 0;
 }
 
+html,
+body {
+  /* Webflow pages inside an iframe can overflow horizontally by 1–2px. */
+  overflow-x: hidden;
+}
+
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  /* Talentsza renders Webflow pages inside an iframe; avoid constraining width. */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  text-align: initial;
+  border-inline: none;
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  overflow-x: hidden;
   box-sizing: border-box;
 }
 
