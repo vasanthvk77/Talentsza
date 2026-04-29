@@ -13,11 +13,11 @@ export const theme = {
     textH: '#08060d',
     bg: '#fff',
     border: '#e5e4e7',
-    codeBg: '#f4f3ec',
-    accent: '#aa3bff',
-    accentBg: 'rgba(170, 59, 255, 0.1)',
-    accentBorder: 'rgba(170, 59, 255, 0.5)',
-    socialBg: 'rgba(244, 243, 236, 0.5)',
+    codeBg: '#fff4eb',
+    accent: '#ED6D00',
+    accentBg: 'rgba(237, 109, 0, 0.1)',
+    accentBorder: 'rgba(237, 109, 0, 0.5)',
+    socialBg: 'rgba(237, 109, 0, 0.1)',
     shadow:
       'rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px',
   },
@@ -26,11 +26,11 @@ export const theme = {
     textH: '#f3f4f6',
     bg: '#16171d',
     border: '#2e303a',
-    codeBg: '#1f2028',
-    accent: '#c084fc',
-    accentBg: 'rgba(192, 132, 252, 0.15)',
-    accentBorder: 'rgba(192, 132, 252, 0.5)',
-    socialBg: 'rgba(47, 48, 58, 0.5)',
+    codeBg: '#2a1f18',
+    accent: '#FF8A29',
+    accentBg: 'rgba(255, 138, 41, 0.15)',
+    accentBorder: 'rgba(255, 138, 41, 0.5)',
+    socialBg: 'rgba(255, 138, 41, 0.15)',
     shadow:
       'rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px',
   },
@@ -55,7 +55,7 @@ export function getThemeVarsCss() {
 
   // Keep this as "real CSS" (not JS-in-CSS) so it can be injected into iframes too.
   return `
-    :root {
+    :root, body {
       --text: ${light.text};
       --text-h: ${light.textH};
       --bg: ${light.bg};
@@ -70,6 +70,10 @@ export function getThemeVarsCss() {
       --sans: ${theme.fonts.sans};
       --heading: ${theme.fonts.heading};
       --mono: ${theme.fonts.mono};
+      
+      /* Override Webflow's native CSS variables that power the green color */
+      --secondary-color: ${light.accent} !important;
+      --secondary-color-text: #ffffff !important;
 
       font: ${theme.typography.baseFontSizeDesktop}/${theme.typography.lineHeight} var(--sans);
       letter-spacing: ${theme.typography.letterSpacing};
@@ -83,13 +87,13 @@ export function getThemeVarsCss() {
     }
 
     @media (max-width: 1024px) {
-      :root {
+      :root, body {
         font-size: ${theme.typography.baseFontSizeMobile};
       }
     }
 
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root, body {
         --text: ${dark.text};
         --text-h: ${dark.textH};
         --bg: ${dark.bg};
@@ -100,6 +104,9 @@ export function getThemeVarsCss() {
         --accent-border: ${dark.accentBorder};
         --social-bg: ${dark.socialBg};
         --shadow: ${dark.shadow};
+        
+        --secondary-color: ${dark.accent} !important;
+        --secondary-color-text: #ffffff !important;
       }
 
       #social .button-icon {
@@ -123,12 +130,20 @@ export function getThemeGlobalOverridesCss() {
     body.global-bg {
       background: var(--bg) !important;
     }
+
+    /* Adjust text color to ensure contrast against orange */
+    [data-wf--button--variant="secondary-bg"] .button-text,
+    [data-wf--button--variant="secondary-bg"] .button-text-hover,
+    [data-wf--button--variant="global-bg"] .button-text,
+    [data-wf--button--variant="global-bg"] .button-text-hover {
+      color: #fff !important;
+    }
   `
 }
 
 export function getWebflowThemeCssForIframe() {
   return `
-    :root {
+    :root, body {
       --text: ${theme.light.text};
       --text-h: ${theme.light.textH};
       --bg: ${theme.light.bg};
@@ -156,7 +171,7 @@ export function getWebflowThemeCssForIframe() {
     }
 
     @media (max-width: 1024px) {
-      :root {
+      :root, body {
         font-size: ${theme.typography.baseFontSizeMobile};
       }
     }

@@ -10,6 +10,33 @@ function escapeRegExp(str) {
 export function transformWebflowHtml(html) {
   let out = html
 
+  // Replace old Webflow logos with the new Talentsza logo
+  out = out.replace(
+    /https:\/\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?logo\.svg/g,
+    '/src/assets/TalentszaLog.png'
+  )
+  out = out.replace(
+    /https:\/\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?white-logo\.svg/g,
+    '/src/assets/TalentszaLog.png'
+  )
+
+  // Globally replace the lime green color in any inline styles or SVGs across ALL files
+  out = out.replace(/#def25c/gi, '#ED6D00')
+
+  // Inject our CSS overrides directly into the <head> of every HTML file
+  // This guarantees the Webflow stylesheet's --secondary-color gets overridden instantly
+  out = out.replace(
+    '</head>',
+    `
+    <style>
+      :root, body {
+        --secondary-color: #ED6D00 !important;
+        --secondary-color-text: #ffffff !important;
+      }
+    </style>
+    </head>`
+  )
+
   // Fix asset references that point to the repo-root `assets/...` folder.
   // Some exported nested pages reference it as `../assets/...`.
   out = out.replace(
