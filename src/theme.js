@@ -15,8 +15,10 @@ export const theme = {
     border: '#e5e4e7',
     codeBg: '#fff4eb',
     accent: '#ED6D00',
-    purple:'#481a54',
-    accentBg: 'rgba(237, 109, 0, 0.1)',
+    purple: '#3e3640ff',
+    footerBg: '#23212f',
+    footerTextColor: '#ffffff',
+    accentBg: 'rgba(237, 109, 0, 0.1)', 
     accentBorder: 'rgba(237, 109, 0, 0.5)',
     socialBg: 'rgba(237, 109, 0, 0.1)',
     shadow:
@@ -141,7 +143,14 @@ export function getThemeGlobalOverridesCss() {
     }
 
     .button-arrow {
-      filter: brightness(0) invert(1) !important;
+      filter: brightness(0) invert(1) !important; /* Default white */
+    }
+
+    /* If the button has a white background, make the arrow orange */
+    [data-wf--button--variant="white-bg"] .button-arrow,
+    .button-wrap[data-wf--button--variant="white-bg"] .button-arrow {
+      /* Filter to convert black to #ED6D00 */
+      filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(1918%) hue-rotate(360deg) brightness(98%) contrast(98%) !important;
     }
 
     /* Professional Fixed Header with Glassmorphism */
@@ -156,6 +165,15 @@ export function getThemeGlobalOverridesCss() {
       -webkit-backdrop-filter: blur(12px) !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
       transition: all 0.3s ease !important;
+    }
+
+    /* Mobile hamburger dropdown nav — same glass background as header */
+    .nav-one-menu.w-nav-menu[data-nav-menu-open],
+    .w-nav-menu[data-nav-menu-open] {
+      background: rgba(164, 164, 164, 0.92) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     /* Remove background from logo containers and nav menu - Targeted specifically to avoid breaking buttons */
@@ -190,11 +208,33 @@ export function getThemeGlobalOverridesCss() {
     .home-one-service-wrap,
     .service-one-list-wrap,
     .service-section,
-    .footer,
     .section-gap,
     .footer-bg,
     .global-bg {
       background-image: none !important;
+    }
+
+    /* Footer background — outer shell white, inner wrap uses footerBg token */
+    footer.footer,
+    .footer {
+      background-color: #eceee6 !important;
+      background-image: none !important;
+    }
+
+    .footer-wrap,
+    .footer-inner {
+      background: ${theme.light.footerBg} !important;
+    }
+
+    .footer-bottom {
+      background: transparent !important;
+    }
+
+    .footer-link-text,
+    .footer-contact-text,
+    .footer-bottom-link-text,
+    .footer-bottom-link {
+      color: ${theme.light.footerTextColor} !important;
     }
 
     /* Compensate for fixed header on sub-pages (Home page usually handles this in hero) */
@@ -204,9 +244,10 @@ export function getThemeGlobalOverridesCss() {
       padding-top: 100px !important;
     }
 
-    /* Specific pseudo-element cleanup */
+    /* Specific pseudo-element cleanup — exclude Webflow nav/slider icons which rely on ::before/::after */
     section::before, section::after,
-    div::before, div::after {
+    div:not(.w-icon-nav-menu):not(.w-icon-slider-left):not(.w-icon-slider-right):not(.w-icon-dropdown-toggle):not(.down-icon)::before,
+    div:not(.w-icon-nav-menu):not(.w-icon-slider-left):not(.w-icon-slider-right):not(.w-icon-dropdown-toggle):not(.down-icon)::after {
       content: none !important;
       display: none !important;
       background: none !important;
@@ -233,7 +274,7 @@ export function getThemeGlobalOverridesCss() {
 
     /* Scale the footer logo accordingly */
     .footer-logo {
-      height: 80px !important;
+      height: 130px !important;
       width: auto !important;
       max-width: none !important;
     }
