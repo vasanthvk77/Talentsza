@@ -15,6 +15,7 @@ export const theme = {
     border: '#e5e4e7',
     codeBg: '#fff4eb',
     accent: '#ED6D00',
+    purple:'#481a54',
     accentBg: 'rgba(237, 109, 0, 0.1)',
     accentBorder: 'rgba(237, 109, 0, 0.5)',
     socialBg: 'rgba(237, 109, 0, 0.1)',
@@ -131,7 +132,7 @@ export function getThemeGlobalOverridesCss() {
       background: var(--bg) !important;
     }
 
-    /* Adjust text color to ensure contrast against orange */
+    /* Adjust text and arrow color to ensure contrast against orange */
     [data-wf--button--variant="secondary-bg"] .button-text,
     [data-wf--button--variant="secondary-bg"] .button-text-hover,
     [data-wf--button--variant="global-bg"] .button-text,
@@ -139,18 +140,102 @@ export function getThemeGlobalOverridesCss() {
       color: #fff !important;
     }
 
-    /* Scale down the footer logo so it matches the header logo's aesthetic */
-    .footer-logo {
-      max-width: 140px !important;
-      height: auto !important;
+    .button-arrow {
+      filter: brightness(0) invert(1) !important;
     }
 
-    /* Remove background from logo containers */
-    .logo-wrap, .logo-link, .logo, .footer-logo-wrap {
+    /* Professional Fixed Header with Glassmorphism */
+    .header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 1000 !important;
+      background: rgba(164, 164, 164, 0.8) !important; /* Semi-transparent dark */
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    /* Remove background from logo containers and nav menu - Targeted specifically to avoid breaking buttons */
+    .logo-wrap, .logo-link, .logo, .footer-logo-wrap,
+    .nav-one-menu, .nav-menu {
       background: transparent !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      padding: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Ensure nav links are transparent but don't force padding which breaks button alignment */
+    .nav-link:not(.button-link) {
+      background: transparent !important;
+    }
+
+    /* Targeted removal of the giant "M" watermark and legacy background artifacts */
+    /* Excluded .breadcrumb-section and .hero-one-section to keep actual content backgrounds */
+    .project-one-bg-image,
+    .counter-three-bg-pattern,
+    .service-overlay,
+    .title-overlay,
+    .text-title-overlay {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    /* Strip decorative background images from specific containers known to have watermarks */
+    .home-one-service-wrapper,
+    .home-one-service-wrap,
+    .service-one-list-wrap,
+    .service-section,
+    .footer,
+    .section-gap,
+    .footer-bg,
+    .global-bg {
+      background-image: none !important;
+    }
+
+    /* Compensate for fixed header on sub-pages (Home page usually handles this in hero) */
+    body:not(.home) .header + .section, 
+    body:not(.home) .header + section,
+    body:not(.home) .breadcrumb-section {
+      padding-top: 100px !important;
+    }
+
+    /* Specific pseudo-element cleanup */
+    section::before, section::after,
+    div::before, div::after {
+      content: none !important;
+      display: none !important;
+      background: none !important;
+    }
+
+    /* Target specific image-based watermarks found in the HTML */
+    .project-one-bg-image,
+    .counter-three-bg-pattern,
+    img[class*="pattern"],
+    img[class*="shape"],
+    img[class*="bg-image"],
+    img[class*="Footer-bg"] {
+      display: none !important;
+      opacity: 0 !important;
+    }
+
+    /* Increased logo height globally and shifted upwards */
+    .logo {
+      height: 70px !important;
+      width: 90px !important;
+      max-width: none !important;
+      margin-top: -10px !important;
+    }
+
+    /* Scale the footer logo accordingly */
+    .footer-logo {
+      height: 80px !important;
+      width: auto !important;
+      max-width: none !important;
     }
 
     /* 
@@ -163,6 +248,14 @@ export function getThemeGlobalOverridesCss() {
       -webkit-mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/69a18049856b05e6278d8180_secondary-left-icon.svg") no-repeat center / contain !important;
       mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/69a18049856b05e6278d8180_secondary-left-icon.svg") no-repeat center / contain !important;
       /* Hide the original green image content while keeping the element size */
+      content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") !important;
+    }
+
+    /* Convert the team-down-arrow image into a purple icon using CSS mask */
+    .team-down-arrow {
+      background-color: ${theme.light.purple} !important;
+      -webkit-mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6384f6adb097c3984ee0_arrow-global.svg") no-repeat center / contain !important;
+      mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6384f6adb097c3984ee0_arrow-global.svg") no-repeat center / contain !important;
       content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") !important;
     }
   `
