@@ -138,6 +138,33 @@ export function getThemeGlobalOverridesCss() {
     [data-wf--button--variant="global-bg"] .button-text-hover {
       color: #fff !important;
     }
+
+    /* Scale down the footer logo so it matches the header logo's aesthetic */
+    .footer-logo {
+      max-width: 140px !important;
+      height: auto !important;
+    }
+
+    /* Remove background from logo containers */
+    .logo-wrap, .logo-link, .logo, .footer-logo-wrap {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 0 !important;
+    }
+
+    /* 
+       FIX: The service-one-icon is an <img> pointing to a green SVG on the CDN.
+       Since we can't change the SVG's internal fill color via CSS variables,
+       we use it as a mask and set the background to our theme's accent color.
+    */
+    .service-one-icon {
+      background-color: var(--accent) !important;
+      -webkit-mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/69a18049856b05e6278d8180_secondary-left-icon.svg") no-repeat center / contain !important;
+      mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/69a18049856b05e6278d8180_secondary-left-icon.svg") no-repeat center / contain !important;
+      /* Hide the original green image content while keeping the element size */
+      content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") !important;
+    }
   `
 }
 

@@ -19,6 +19,22 @@ export function transformWebflowHtml(html) {
     /https:\/\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?white-logo\.svg/g,
     '/src/assets/TalentszaLog.png'
   )
+  out = out.replace(
+    /(src|href)=(['"])(?:\.\.\/|\.\/)?assets\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?logo\.svg\2/g,
+    '$1=$2/src/assets/TalentszaLog.png$2'
+  )
+  out = out.replace(
+    /(src|href)=(['"])(?:\.\.\/|\.\/)?assets\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?white-logo\.svg\2/g,
+    '$1=$2/src/assets/TalentszaLog.png$2'
+  )
+  out = out.replace(
+    /(src|href)=(['"])(?:\.\.\/|\.\/)?assets\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?footer-logo\.svg\2/g,
+    '$1=$2/src/assets/TalentszaLog.png$2'
+  )
+  out = out.replace(
+    /https:\/\/cdn\.prod\.website-files\.com\/[^"']+\/([^"']+-)?footer-logo\.svg/g,
+    '/src/assets/TalentszaLog.png'
+  )
 
   // Globally replace the lime green color in any inline styles or SVGs across ALL files
   out = out.replace(/#def25c/gi, '#ED6D00')
