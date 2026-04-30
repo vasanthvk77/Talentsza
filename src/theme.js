@@ -36,9 +36,9 @@ export const theme = {
       'rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px',
   },
   fonts: {
-    sans: "system-ui, 'Segoe UI', Roboto, sans-serif",
-    heading: "system-ui, 'Segoe UI', Roboto, sans-serif",
-    mono: 'ui-monospace, Consolas, monospace',
+    sans: "'DM Sans', system-ui, -apple-system, sans-serif",
+    heading: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+    mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace",
   },
   typography: {
     baseFontSizeDesktop: '18px',
