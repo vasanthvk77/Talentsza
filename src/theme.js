@@ -299,6 +299,36 @@ export function getThemeGlobalOverridesCss() {
       mask: url("https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6384f6adb097c3984ee0_arrow-global.svg") no-repeat center / contain !important;
       content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") !important;
     }
+
+    /* Fix testimonial slider arrows visibility on mobile */
+    .testimonial-slider-arrow {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 100 !important;
+    }
+
+    .slider-arrow {
+      display: block !important;
+      opacity: 1 !important;
+    }
+
+    @media (max-width: 767px) {
+      .testimonial-slider-arrow {
+        width: 40px !important;
+        height: 40px !important;
+        bottom: 20px !important;
+        top: auto !important;
+      }
+      .testimonial-slider-arrow.w-slider-arrow-left {
+        right: 70px !important;
+        left: auto !important;
+      }
+      .testimonial-slider-arrow.w-slider-arrow-right {
+        right: 20px !important;
+        left: auto !important;
+      }
+    }
   `
 }
 
