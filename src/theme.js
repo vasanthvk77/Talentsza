@@ -329,6 +329,70 @@ export function getThemeGlobalOverridesCss() {
         left: auto !important;
       }
     }
+
+    /* Marquee Fixes - Professional Scroll without Overlapping */
+    .marquee-section {
+      overflow: hidden !important;
+      background: var(--bg) !important;
+      padding: 60px 0 !important;
+      width: 100vw !important;
+      position: relative !important;
+      left: 50% !important;
+      right: 50% !important;
+      margin-left: -50vw !important;
+      margin-right: -50vw !important;
+    }
+
+    .marquee {
+      display: flex !important;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+      user-select: none !important;
+      width: 100% !important;
+    }
+
+    .marquee-wrap {
+      display: flex !important;
+      flex-shrink: 0 !important;
+      min-width: 100% !important;
+      justify-content: space-around !important;
+      align-items: center !important;
+      animation: scroll-marquee 40s linear infinite !important;
+    }
+
+    @keyframes scroll-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Ensure no gaps or overlapping during animation */
+    .marquee:hover .marquee-wrap {
+      animation-play-state: paused !important;
+    }
+
+    .marquee-text {
+      font-family: var(--heading) !important;
+      font-size: clamp(60px, 10vw, 150px) !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      color: rgba(0, 0, 0, 0.04) !important;
+      margin: 0 50px !important;
+      white-space: nowrap !important;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .marquee-text {
+        color: rgba(255, 255, 255, 0.04) !important;
+      }
+    }
+
+    .marquee-img {
+      width: 60px !important;
+      height: 60px !important;
+      opacity: 0.1 !important;
+      flex-shrink: 0 !important;
+    }
   `
 }
 
