@@ -1,3 +1,5 @@
+import testimonials from '../testimonialsData.js'
+
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -52,12 +54,12 @@ export function transformWebflowHtml(html) {
 
   // Replace placeholder contact info
   out = out.replace(/example@pbmit\.com/g, 'info@talentsza.com')
-  out = out.replace(/2972 Westheimer Rd\. Santa Ana, Illinoi/g, 'Talentsza HQ, India')
-  out = out.replace(/\+1-234-567-89/g, '+91-XXXXXXXXXX')
+  out = out.replace(/2972 Westheimer Rd\. Santa Ana, Illinoi/g, 'Coimbatore, Tamil Nadu, India')
+  out = out.replace(/\+1-234-567-89/g, '+91-96266 26866')
   out = out.replace(/Copyright © 2025/g, 'Copyright © 2026')
 
   // Remove Webflow credits
-  out = out.replace(/, Powered by\s*<a[^>]*>Webflow<\/a>/gi, '')
+  out = out.replace(/, Powered by\s*<a[^>]*><\/a>/gi, '')
   out = out.replace(/<a[^>]*class="[^"]*w-webflow-badge[^"]*"[^>]*>.*?<\/a>/gi, '')
 
   // Aggressive Logo Suppression: Replace ANY asset that contains 'logo' and 'mercket' or the legacy CDN ID
@@ -169,21 +171,70 @@ export function transformWebflowHtml(html) {
         if (!arrow.style.transition) {
            arrow.style.transition = 'transform 0.3s ease';
         }
+        const textEl = arrow.nextElementSibling;
         if (st > lastScrollTop) {
           // downscroll
-          arrow.style.transform = 'rotate(0deg)';
+          arrow.style.transform = 'translateY(0) rotate(0deg)';
+          if (textEl) textEl.innerText = 'Scroll Down';
         } else {
           // upscroll
-          arrow.style.transform = 'rotate(180deg)';
+          arrow.style.transform = 'translateY(-10px) rotate(180deg)';
+          if (textEl) textEl.innerText = 'Scroll Up';
         }
       });
       lastScrollTop = st <= 0 ? 0 : st;
     }, false);
+
+    // Replace footer social icons with exactly: LinkedIn | Instagram | YouTube | Facebook
+    const footerSocials = document.querySelector('.footer .footer-social-icons');
+    if (footerSocials) {
+      footerSocials.innerHTML = \`
+        <a href="https://www.linkedin.com/" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
+        </a>
+      \`;
+    }
   })();
 </script>
 </body>
   `;
   out = out.replace('</body>', scrollScript);
+
+  // Dynamic Testimonials Injection
+  // We generate 50 slides from our external src/testimonialsData.js file
+  const testimonialSlidesHtml = testimonials.map(t => `
+    <div class="testimonial-slide w-slide">
+      <div class="testimonial-one">
+        <div class="testimonial-one-desc">“${t.topic}”</div>
+        <div class="testimonial-one-detail-wrap">
+          <div class="testimonial-one-image-wrap">
+            <img loading="lazy" src="${t.img}" alt="${t.name}" class="testimonial-one-image">
+          </div>
+          <div class="testimonial-one-title-wrap">
+            <div class="text-style-h4">${t.name}</div>
+            <div class="category">${t.role}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Replace the placeholder slides in the testimonial slider mask
+  // We match the mask container, all its inner slides, and the closing tag, 
+  // ensuring we stop exactly before the testimonial arrows.
+  out = out.replace(
+    /(<div[^>]*class="[^"]*testimonial-list w-slider-mask[^"]*"[^>]*>)([\s\S]+?)(<\/div>)(?=[\s\n]*<div[^>]*class="[^"]*testimonial-slider-arrow)/i,
+    `$1${testimonialSlidesHtml}$3`
+  )
 
   return out
 }
