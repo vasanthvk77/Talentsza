@@ -314,7 +314,7 @@
             <h2 class="breadcrumb-heading-title">Contact Us</h2>
           </div>
         </div>
-        <div class="breadcrumb-bottom-content">
+        <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
           <div class="breadcrumb-pages-map">
             <div class="breadcrumb-pages-text-wrap">
               <a href="#" class="breadcrumb-pages-text underline">Home</a>
@@ -349,7 +349,7 @@
               <div class="heading-subheading-desc-wrap">
                 <div class="heading-subheading-desc white-text">
                   Whether you have questions, require expert guidance, or are
-                  ready to start a project, we’re here to provide support.
+                  ready to start your journey, we’re here to help you succeed.
                 </div>
               </div>
             </div>
@@ -365,7 +365,7 @@
                 <div class="icon-style-six-title-wrap">
                   <div class="text-style-h4 white-text">Call us 24/7</div>
                   <div class="icon-style-six-subtitle white-desc-text">
-                    Phone: +001 236-895-4732
+                    Phone: +91-96266 26866
                   </div>
                 </div>
               </div>
@@ -380,7 +380,7 @@
                 <div class="icon-style-six-title-wrap">
                   <div class="text-style-h4 white-text">Mail us 24/7</div>
                   <div class="icon-style-six-subtitle white-desc-text">
-                    noreply@pbminfotech.com
+                    info@talentsza.com
                   </div>
                 </div>
               </div>
@@ -395,7 +395,7 @@
                 <div class="icon-style-six-title-wrap">
                   <div class="text-style-h4 white-text">Visit our office</div>
                   <div class="icon-style-six-subtitle white-desc-text">
-                    Los Angeles Gournandi, 1230 Bariasl
+                    Sathy Rd, KRG Nagar, Ganapathy,<br>Coimbatore, Tamil Nadu 641006
                   </div>
                 </div>
               </div>
@@ -445,7 +445,8 @@
                 id="wf-form-Contact-Form"
                 name="wf-form-Contact-Form"
                 data-name="Contact Form"
-                method="get"
+                method="post"
+                enctype="multipart/form-data"
                 class="contact-form"
                 data-wf-page-id="6944f1597ac277b25076cc94"
                 data-wf-element-id="78c8a190-b222-9a37-27a0-57889f9f5b04"
@@ -456,78 +457,77 @@
                     maxlength="256"
                     name="Full-Name"
                     data-name="Full Name"
-                    style="opacity: 0"
                     placeholder="Full Name *"
-                    data-w-id="78c8a190-b222-9a37-27a0-57889f9f5b05"
                     type="text"
                     id="Full-Name"
                     required=""
                   /><input
-                    class="contact-form-input bg-light w-node-ec75112a-1ef3-15ce-0baf-2cea67c7d092-5076cc94 w-input"
+                    class="contact-form-input bg-light w-input"
                     maxlength="256"
                     name="Phone-Number"
                     data-name="Phone Number"
-                    style="opacity: 0"
-                    placeholder="Phone Number*"
-                    data-w-id="ec75112a-1ef3-15ce-0baf-2cea67c7d092"
+                    placeholder="Phone Number *"
                     type="tel"
                     id="Phone-Number"
                     required=""
                   /><input
-                    class="contact-form-input bg-light w-node-da8baa20-9ff3-ebcd-822a-953475167a54-5076cc94 w-input"
+                    class="contact-form-input bg-light w-input"
                     maxlength="256"
                     name="Email-Address"
                     data-name="Email Address"
-                    style="opacity: 0"
-                    placeholder="Email Address*"
-                    data-w-id="da8baa20-9ff3-ebcd-822a-953475167a54"
+                    placeholder="Email Address *"
                     type="email"
                     id="Email-Address"
                     required=""
-                  /><select
-                    id="Service"
-                    name="Service"
-                    data-name="Service"
+                  /><input
+                    class="contact-form-input bg-light w-input"
+                    maxlength="256"
+                    name="Place"
+                    data-name="Place"
+                    placeholder="Place *"
+                    type="text"
+                    id="Place"
                     required=""
-                    data-w-id="893cb8af-57f6-94f8-ce31-aa7719c4f384"
-                    style="opacity: 0"
-                    class="contact-form-input bg-light w-node-_893cb8af-57f6-94f8-ce31-aa7719c4f384-5076cc94 w-select"
+                  /><input
+                    class="contact-form-input bg-light w-input"
+                    maxlength="256"
+                    name="Education"
+                    data-name="Education"
+                    placeholder="Education *"
+                    type="text"
+                    id="Education"
+                    required=""
+                  /><select
+                    id="Work-Preference"
+                    name="Work-Preference"
+                    data-name="Work Preference"
+                    required=""
+                    class="contact-form-input bg-light w-select"
                   >
-                    <option value="">Service Type</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="Advertising Services">
-                      Advertising Services
-                    </option>
-                    <option value="Performance Marketing">
-                      Performance Marketing
-                    </option>
-                    <option value="Lead Generation">
-                      Lead Generation
-                    </option></select
-                  ><textarea
+                    <option value="">Work Preference *</option>
+                    <option value="Domestic">Domestic</option>
+                    <option value="Abroad">Abroad</option>
+                    <option value="Both">Both</option>
+                  </select>
+                  <div id="w-node-cv-upload" class="cv-upload-wrap">
+                    <label for="CV" class="field-label" style="margin-bottom: 8px; display: block; font-size: 14px; opacity: 0.8;">Upload CV (Optional)</label>
+                    <input
+                      class="contact-form-input bg-light w-input"
+                      name="CV"
+                      data-name="CV"
+                      type="file"
+                      id="CV"
+                      style="padding-top: 10px;"
+                    />
+                  </div>
+                  <textarea
                     class="contact-form-input textarea bg-light w-node-_78c8a190-b222-9a37-27a0-57889f9f5b08-5076cc94 w-input"
                     maxlength="5000"
                     name="Message"
                     data-name="Message"
-                    style="opacity: 0"
                     placeholder="Message"
-                    data-w-id="78c8a190-b222-9a37-27a0-57889f9f5b08"
                     id="Message"
-                  ></textarea
-                  ><label
-                    id="w-node-_55c055bd-3701-038c-6b8f-26c761c6154e-5076cc94"
-                    class="w-checkbox"
-                    ><input
-                      type="checkbox"
-                      id="checkbox"
-                      name="checkbox"
-                      data-name="Checkbox"
-                      class="w-checkbox-input checkbox"
-                    /><span class="checkbox-label w-form-label" for="checkbox"
-                      >Save my name, email, and website in this browser for the
-                      next time I comment.</span
-                    ></label
-                  >
+                  ></textarea>
                 </div>
                 <div
                   data-w-id="78ed9629-787e-3d1e-9063-a73e3b5db0af"
@@ -576,7 +576,7 @@
         </div>
       </div>
     </section>
-    <section class="client-logo-section">
+    <!-- <section class="client-logo-section">
       <div class="w-layout-blockcontainer container w-container">
         <div class="client-logo-title-wrap">
           <div
@@ -798,7 +798,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <section
       data-w-id="02ffdc56-b382-d351-d661-fcaa1116dc9c"
       style="opacity: 0"
@@ -807,14 +807,16 @@
       <div
         data-w-id="02ffdc56-b382-d351-d661-fcaa1116dc9d"
         class="maps w-embed w-iframe"
+      style="margin-top: 5rem"
+
       >
         <iframe
           width="100%"
           height="100%"
           loading="lazy"
-          src="https://maps.google.com/maps?q=jersery%20city%20new%20york&amp;t=m&amp;z=15&amp;output=embed&amp;iwloc=near"
-          title="jersery city new york"
-          aria-label="jersery city new york"
+          src="https://maps.google.com/maps?q=11.043445,76.985102&amp;t=m&amp;z=15&amp;output=embed&amp;iwloc=near"
+          title="Talentsza - Coimbatore Office"
+          aria-label="Talentsza - Coimbatore Office"
         ></iframe>
       </div>
     </section>
