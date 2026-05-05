@@ -61,7 +61,12 @@
     </style>
     <style>
       /* Clean Reset: Restoring original working styles for the hero section */
-      /* All custom counter overrides removed to fix alignment and visibility */
+      /* Targeted fix for background image clarity - Removes any frosted blur effects */
+      .hero-one-wrap, .hero-one-section, .hero-one-slide {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+      }
       
       /* Keep the team image fix as it was requested and is working */
       .team-one-preview {
@@ -346,7 +351,7 @@
       >
         <div class="w-slider-mask">
           <div class="hero-one-slide w-slide">
-            <div class="hero-one-wrap">
+            <div class="hero-one-wrap" style="background-image: url('webflow-pages/assets/hero-bg-1.png') !important; background-size: cover !important; background-position: center !important;">
               <div
                 class="w-layout-blockcontainer container hero-container w-container"
               >
@@ -446,7 +451,7 @@
             </div>
           </div>
           <div class="hero-one-slide w-slide">
-            <div class="hero-one-wrap _02">
+            <div class="hero-one-wrap _02" style="background-image: url('webflow-pages/assets/hero-bg-2.jpg') !important; background-size: cover !important; background-position: center !important;">
               <div
                 class="w-layout-blockcontainer container hero-container w-container"
               >
