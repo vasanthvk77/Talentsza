@@ -28,19 +28,27 @@
   <meta content="Webflow" name="generator" />
   <link href="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/css/mercket.webflow.shared.3eb5ac14d.min.css"
     rel="stylesheet" type="text/css" />
-  <style>
-    @media (min-width: 992px) {
-      html.w-mod-js:not(.w-mod-ix) [data-w-id="b094c08e-ead0-760d-130a-4af08c8efc5a"] {
-        opacity: 0;
+    <style>
+      @media (min-width: 992px) {
+        html.w-mod-js:not(.w-mod-ix) [data-w-id="b094c08e-ead0-760d-130a-4af08c8efc5a"] {
+          opacity: 0;
+        }
       }
-    }
 
-    /* Team image consistency fix */
-    .team-one-preview {
-      object-fit: contain !important;
-      background-color: var(--light-color) !important;
-    }
-  </style>
+      /* Team image consistency fix */
+      .team-one-preview {
+        object-fit: contain !important;
+        background-color: var(--light-color) !important;
+      }
+      @media (max-width: 991px) {
+        .breadcrumb-desc {
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          color: #ffffff !important;
+        }
+      }
+    </style>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link href="https://fonts.gstatic.com" rel="preconnect" />
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -244,10 +252,10 @@
           </div>
           <div class="breadcrumb-pages-text">Service</div>
         </div>
-        <div class="breadcrumb-desc-wrap">
-          <!-- <div class="breadcrumb-desc">
-             Designed to help individuals grow and succeed in today’s competitive world.
-            </div> -->
+        <div class="breadcrumb-desc-wrap" style="display: block !important;">
+          <div class="breadcrumb-desc">
+            Designed to help individuals grow and succeed in today’s competitive world.
+          </div>
         </div>
       </div>
     </div>
