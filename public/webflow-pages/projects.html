@@ -53,6 +53,47 @@
         object-fit: contain !important;
         background-color: var(--light-color) !important;
       }
+      .breadcrumb-section {
+        background-image: url("/webflow-pages/assets/SkilledTeam.jpeg") !important;
+      }
+      /* Expertise Section Alignment & Styling */
+      .icon-style-five-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 30px !important;
+        align-items: start !important;
+      }
+      .icon-style-five {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: left !important;
+      }
+      .icon-style-five-header {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      .icon-style-five-title {
+        margin: 0 !important;
+        line-height: 1.2 !important;
+      }
+      .icon-style-five-icon-wrap {
+        background-color: #ff7a00 !important; /* Brand Orange */
+        flex-shrink: 0 !important;
+      }
+      @media (max-width: 991px) {
+        .icon-style-five-wrap {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        .breadcrumb-desc {
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          color: #ffffff !important;
+        }
+      }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -274,31 +315,9 @@
                               href="our-team.html"
                               class="dropdown-link w-dropdown-link"
                               >Our Team</a
-                            ><a
-                              href="career.html"
-                              class="dropdown-link w-dropdown-link"
-                              >Career</a
-                            ><a
-                              href="faq-page.html"
-                              class="dropdown-link w-dropdown-link"
-                              >FAQ</a
                             >
                           </div>
-                          <div class="mega-menu-column">
-                            <a
-                              href="utility-pages/style-guide.html"
-                              class="dropdown-link w-dropdown-link"
-                              >Style Guide</a
-                            ><a
-                              href="utility-pages/licenses.html"
-                              class="dropdown-link w-dropdown-link"
-                              >Licensing</a
-                            ><a
-                              href="utility-pages/changelog.html"
-                              class="dropdown-link w-dropdown-link"
-                              >Changelog</a
-                            >
-                          </div>
+                         
                         </div>
                       </nav>
                     </div>
@@ -399,21 +418,21 @@
       <div class="w-layout-blockcontainer container-large w-container">
         <div class="breadcrumb-wrap">
           <div class="breadcrumb-title-animation">
-            <h2 class="breadcrumb-heading-title">Our Projects</h2>
+            <h2 class="breadcrumb-heading-title">Skilled Team</h2>
           </div>
         </div>
-        <div class="breadcrumb-bottom-content">
+        <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
           <div class="breadcrumb-pages-map">
             <div class="breadcrumb-pages-text-wrap">
               <a href="#" class="breadcrumb-pages-text underline">Home</a>
               <div class="dashed">/</div>
             </div>
-            <div class="breadcrumb-pages-text">Project</div>
+            <div class="breadcrumb-pages-text">Team</div>
           </div>
           <div class="breadcrumb-desc-wrap">
             <div class="breadcrumb-desc">
-              Explore our work and see how we transform ideas into impactful
-              digital experiences.
+              Meet the visionaries, strategists, and experts behind Talentsza,
+              dedicated to your professional growth and success.
             </div>
           </div>
         </div>
@@ -421,655 +440,74 @@
     </section>
     <section class="section-gap">
       <div class="w-layout-blockcontainer container w-container">
-        <div
-          data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0de8"
-          class="project-height"
-        >
-          <div class="project-one-sticky">
-            <img
-              src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/694d02526f75e6997a9de80d_Footer-bg.png"
-              loading="lazy"
-              sizes="(max-width: 673px) 100vw, 673px, 100vw"
-              srcset="
-                https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/694d02526f75e6997a9de80d_Footer-bg-p-500.png 500w,
-                https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/694d02526f75e6997a9de80d_Footer-bg.png       673w
-              "
-              alt="Footer-bg"
-              class="project-one-bg-image"
-            />
-            <div class="project-one-wrap">
-              <div class="project-one-heading-wrap">
-                <div>
-                  <div class="heading-subtitle">
-                    <div class="subtitle-head-wrap">
-                      <div class="subtitle-left-icon"></div>
-                      <div class="subtitle-head">Our projects</div>
-                    </div>
-                    <div class="heading-title-animation">
-                      <h2 class="heading-title big">Latest work</h2>
-                      <div class="title-overlay light-bg"></div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0df7"
-                  style="opacity: 0"
-                  class="project-one-date-wrapper display-none-991"
-                >
-                  <div class="project-one-date _01">08.2025</div>
-                  <div class="project-one-date _02">10.2025</div>
-                  <div class="project-one-date _03">12.2025</div>
-                  <div class="project-one-date _04">04.2025</div>
-                </div>
-              </div>
-              <div class="project-one display-none-991">
-                <div class="project-one-left-column">
-                  <div
-                    data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0e02"
-                    style="opacity: 0"
-                    class="project-one-desc-wrap"
-                  >
-                    <div class="project-one-desc _01">
-                      We don’t just design. We build experiences that tell a
-                      story and leave a lasting impression. Take a closer look
-                      at our selected work and discover how we translate ideas
-                      into reality.
-                    </div>
-                    <div class="project-one-desc _02">
-                      From insight to execution, we design experiences that
-                      strengthen brands and deliver value, built for scale and
-                      impact. Explore our work to see ideas transformed into
-                      results.
-                    </div>
-                    <div class="project-one-desc _03">
-                      Smart marketing is more than visuals—it’s about influence
-                      and performance, measured, optimized, and refined. View
-                      our selected work and learn how we deliver outcomes for
-                      you.
-                    </div>
-                    <div class="project-one-desc _04">
-                      Great brands are built on meaningful experiences that
-                      connect and perform, driven by strategy and insight.
-                      Explore our selected work to see how results come
-                      together.
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0e0b"
-                  style="opacity: 0"
-                  class="project-one-center-column"
-                >
-                  <div class="project-one-image-wrap">
-                    <img
-                      src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6bc0e231f45c87443724_project-01.jpg"
-                      loading="lazy"
-                      alt="project-01"
-                      class="project-one-image _01"
-                    /><img
-                      src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6bbf732a0e087323d868_project-02.jpg"
-                      alt="project-02"
-                      class="project-one-image _02"
-                    /><img
-                      src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6bc160b62943680d6e7b_project-03.jpg"
-                      alt="project-03"
-                      class="project-one-image _03"
-                    /><img
-                      src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6bc1dbf046f7b9b9ebfd_project-04.jpg"
-                      alt="project-04"
-                      class="project-one-image _04"
-                    />
-                  </div>
-                </div>
-                <div class="project-one-right-column">
-                  <div
-                    data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0e12"
-                    style="opacity: 0"
-                    class="project-one-title-wrap"
-                  >
-                    <div class="project-one-title _01">Content marketing</div>
-                    <div class="project-one-title _02">
-                      Revenue Optimization
-                    </div>
-                    <div class="project-one-title _03">Campaign management</div>
-                    <div class="project-one-title _04">Engagement Growth</div>
-                  </div>
-                  <div
-                    data-w-id="4bce87ea-893a-dec1-cec5-ca15d8ae0e1b"
-                    style="opacity: 0"
-                    class="button-wrap"
-                  >
-                    <a
-                      href="projects.html"
-                      data-wf--button--variant="secondary-bg"
-                      data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
-                      aria-current="page"
-                      class="button-link w-inline-block w--current"
-                      ><div class="button-hover-overlay"></div>
-                      <div class="button-text-wrapper">
-                        <div class="button-text-wrap">
-                          <div class="button-text">View all Projects</div>
-                          <div class="button-text-hover">View all Projects</div>
-                        </div>
-                      </div>
-                      <div class="button-arrow-wrapper">
-                        <div class="button-arrow-wrap">
-                          <img
-                            src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
-                            loading="lazy"
-                            width="20"
-                            height="20"
-                            alt="button-arrow"
-                            class="button-arrow"
-                          />
-                        </div></div
-                    ></a>
-                  </div>
-                </div>
-              </div>
+        <div class="heading-subtitle center">
+          <div class="subtitle-head-wrap">
+            <div class="subtitle-left-icon"></div>
+            <div class="subtitle-head">Why Choose Us</div>
+          </div>
+          <div class="heading-title-animation">
+            <h2 class="heading-title">Our Strategic Excellence</h2>
+            <div class="title-overlay light-bg"></div>
+          </div>
+          <div class="heading-subheading-desc-wrap">
+            <div class="heading-subheading-desc">
+              At Talentsza, we bring together a powerhouse of expertise dedicated to unlocking your potential and driving real-world success.
             </div>
-            <div
-              data-delay="4000"
-              data-animation="slide"
-              class="slider-responsive display-991 w-slider"
-              data-autoplay="true"
-              data-easing="ease"
-              data-hide-arrows="false"
-              data-disable-swipe="false"
-              data-autoplay-limit="0"
-              data-nav-spacing="3"
-              data-duration="500"
-              data-infinite="true"
-            >
-              <div class="slider-responsive-wrap w-slider-mask">
-                <div class="slide w-slide">
-                  <div class="project-one-list-wrap w-dyn-list">
-                    <div role="list" class="project-one-list w-dyn-items">
-                      <div role="listitem" class="project-one w-dyn-item">
-                        <div class="project-one-image-wrap">
-                          <img
-                            src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01.jpg"
-                            loading="lazy"
-                            alt="project-01"
-                            sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 939px"
-                            srcset="
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01-p-500.jpg   500w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01-p-800.jpg   800w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01-p-1080.jpg 1080w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01.jpg        1520w
-                            "
-                            class="project-one-image"
-                          />
-                        </div>
-                        <div class="project-one-title-wrap">
-                          <div class="project-one-title">HR Solutions</div>
-                        </div>
-                        <div class="project-one-desc-wrap">
-                          <div class="project-one-desc">
-                            This project focused on delivering practical HR
-                            solutions to improve workforce management. The
-                            outcome supported stronger organizational structure
-                            and long-term growth.
-                          </div>
-                        </div>
-                        <div class="button-wrap">
-                          <a
-                            href="project/hr-solutions.html"
-                            data-wf--button--variant="white-bg"
-                            data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
-                            class="button-link w-inline-block"
-                            ><div
-                              class="button-hover-overlay w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            ></div>
-                            <div
-                              class="button-text-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-text-wrap">
-                                <div class="button-text">Read More</div>
-                                <div class="button-text-hover">Read More</div>
-                              </div>
-                            </div>
-                            <div
-                              class="button-arrow-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
-                                  loading="lazy"
-                                  width="20"
-                                  height="20"
-                                  alt="button-arrow"
-                                  class="button-arrow"
-                                />
-                              </div></div
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="slide w-slide">
-                  <div class="project-one-list-wrap w-dyn-list">
-                    <div role="list" class="project-one-list w-dyn-items">
-                      <div role="listitem" class="project-one w-dyn-item">
-                        <div class="project-one-image-wrap">
-                          <img
-                            src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02.jpg"
-                            loading="lazy"
-                            alt="project-02"
-                            sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 939px"
-                            srcset="
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02-p-500.jpg   500w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02-p-800.jpg   800w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02-p-1080.jpg 1080w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02.jpg        1520w
-                            "
-                            class="project-one-image"
-                          />
-                        </div>
-                        <div class="project-one-title-wrap">
-                          <div class="project-one-title">
-                            Marketing solution
-                          </div>
-                        </div>
-                        <div class="project-one-desc-wrap">
-                          <div class="project-one-desc">
-                            The marketing solution delivered targeted campaigns
-                            focused on visibility, engagement, and measurable
-                            results. The project supported sustainable business
-                            growth.
-                          </div>
-                        </div>
-                        <div class="button-wrap">
-                          <a
-                            href="project/marketing-solution.html"
-                            data-wf--button--variant="white-bg"
-                            data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
-                            class="button-link w-inline-block"
-                            ><div
-                              class="button-hover-overlay w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            ></div>
-                            <div
-                              class="button-text-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-text-wrap">
-                                <div class="button-text">Read More</div>
-                                <div class="button-text-hover">Read More</div>
-                              </div>
-                            </div>
-                            <div
-                              class="button-arrow-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
-                                  loading="lazy"
-                                  width="20"
-                                  height="20"
-                                  alt="button-arrow"
-                                  class="button-arrow"
-                                />
-                              </div></div
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="slide w-slide">
-                  <div class="project-one-list-wrap w-dyn-list">
-                    <div role="list" class="project-one-list w-dyn-items">
-                      <div role="listitem" class="project-one w-dyn-item">
-                        <div class="project-one-image-wrap">
-                          <img
-                            src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03.jpg"
-                            loading="lazy"
-                            alt="project-03"
-                            sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 939px"
-                            srcset="
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03-p-500.jpg   500w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03-p-800.jpg   800w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03-p-1080.jpg 1080w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03.jpg        1520w
-                            "
-                            class="project-one-image"
-                          />
-                        </div>
-                        <div class="project-one-title-wrap">
-                          <div class="project-one-title">Engagement Growth</div>
-                        </div>
-                        <div class="project-one-desc-wrap">
-                          <div class="project-one-desc">
-                            Focused on increasing audience interaction and brand
-                            engagement across digital platforms, resulting in
-                            measurable improvements and stronger customer
-                            loyalty.
-                          </div>
-                        </div>
-                        <div class="button-wrap">
-                          <a
-                            href="project/engagement-growth.html"
-                            data-wf--button--variant="white-bg"
-                            data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
-                            class="button-link w-inline-block"
-                            ><div
-                              class="button-hover-overlay w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            ></div>
-                            <div
-                              class="button-text-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-text-wrap">
-                                <div class="button-text">Read More</div>
-                                <div class="button-text-hover">Read More</div>
-                              </div>
-                            </div>
-                            <div
-                              class="button-arrow-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
-                                  loading="lazy"
-                                  width="20"
-                                  height="20"
-                                  alt="button-arrow"
-                                  class="button-arrow"
-                                />
-                              </div></div
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="slide w-slide">
-                  <div class="project-one-list-wrap w-dyn-list">
-                    <div role="list" class="project-one-list w-dyn-items">
-                      <div role="listitem" class="project-one w-dyn-item">
-                        <div class="project-one-image-wrap">
-                          <img
-                            src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04.jpg"
-                            loading="lazy"
-                            alt="project-04"
-                            sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 939px"
-                            srcset="
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04-p-500.jpg   500w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04-p-800.jpg   800w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04-p-1080.jpg 1080w,
-                              https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04.jpg        1520w
-                            "
-                            class="project-one-image"
-                          />
-                        </div>
-                        <div class="project-one-title-wrap">
-                          <div class="project-one-title">Content marketing</div>
-                        </div>
-                        <div class="project-one-desc-wrap">
-                          <div class="project-one-desc">
-                            The content marketing solution combined SEO-driven
-                            content, distribution to increase visibility and
-                            qualified traffic. Results were measured through
-                            engagement and conversion metrics.
-                          </div>
-                        </div>
-                        <div class="button-wrap">
-                          <a
-                            href="project/content-marketing.html"
-                            data-wf--button--variant="white-bg"
-                            data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
-                            class="button-link w-inline-block"
-                            ><div
-                              class="button-hover-overlay w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            ></div>
-                            <div
-                              class="button-text-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-text-wrap">
-                                <div class="button-text">Read More</div>
-                                <div class="button-text-hover">Read More</div>
-                              </div>
-                            </div>
-                            <div
-                              class="button-arrow-wrapper w-variant-a5f868ad-bc85-023e-3422-a627daa9b2ef"
-                            >
-                              <div class="button-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
-                                  loading="lazy"
-                                  width="20"
-                                  height="20"
-                                  alt="button-arrow"
-                                  class="button-arrow"
-                                />
-                              </div></div
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </div>
+        </div>
+        <div class="icon-style-five-wrap" style="margin-top: 50px;">
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6cd3de1c5374c545dfad_trophy.svg" alt="trophy" class="icon-style-five-icon" />
               </div>
-              <div class="display-none w-slider-arrow-left"></div>
-              <div class="display-none w-slider-arrow-right"></div>
-              <div class="display-none w-slider-nav"></div>
+              <div class="icon-style-five-title text-style-h2">Expert Mentorship</div>
+            </div>
+            <div class="icon-style-five-desc">
+              Personalized guidance from industry leaders with decades of experience in career coaching and skill development.
+            </div>
+          </div>
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63877a91720e6dc8e738_icon-02.svg" alt="icon-02" class="icon-style-five-icon" />
+              </div>
+              <div class="icon-style-five-title text-style-h2">Global Insights</div>
+            </div>
+            <div class="icon-style-five-desc">
+              Strategic understanding of both domestic and international markets, giving you a competitive edge in any field.
+            </div>
+          </div>
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63895edaf4f4647fcd70_icon-03.svg" alt="icon-03" class="icon-style-five-icon" />
+              </div>
+              <div class="icon-style-five-title text-style-h2">Proven Results</div>
+            </div>
+            <div class="icon-style-five-desc">
+              A track record of helping thousands of professionals and students secure high-impact roles and top-tier admissions.
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="section-gap section-margin padding-top-0">
-      <div class="client-logo-title">1000+ Trusted Clients Over Worldwide</div>
-      <div class="overflow-hidden">
-        <div class="client-logo-one-box">
-          <div class="client-logo-one-wrap">
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e753a03faccfeb91e6_Client-logo-01.svg"
-                loading="lazy"
-                alt="Client-logo-01"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e71be5276ceebb8e89_Client-logo-02.svg"
-                loading="lazy"
-                alt="Client-logo-02"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e7510f68fc4d688e31_Client-logo-03.svg"
-                loading="lazy"
-                alt="Client-logo-03"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e6ce17a4f516de8303_Client-logo-04.svg"
-                loading="lazy"
-                alt="Client-logo-04"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e8f744754ce95061a0_Client-logo-05.svg"
-                loading="lazy"
-                alt="Client-logo-05"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5eaa3230a7a6bb76372_Client-logo-06.svg"
-                loading="lazy"
-                alt="Client-logo-06"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e71be5276ceebb8e89_Client-logo-02.svg"
-                loading="lazy"
-                alt="Client-logo-02"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e753a03faccfeb91e6_Client-logo-01.svg"
-                loading="lazy"
-                alt="Client-logo-01"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e7510f68fc4d688e31_Client-logo-03.svg"
-                loading="lazy"
-                alt="Client-logo-03"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e6ce17a4f516de8303_Client-logo-04.svg"
-                loading="lazy"
-                alt="Client-logo-04"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e8f744754ce95061a0_Client-logo-05.svg"
-                loading="lazy"
-                alt="Client-logo-05"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5eaa3230a7a6bb76372_Client-logo-06.svg"
-                loading="lazy"
-                alt="Client-logo-06"
-                class="client-one-logo"
-              />
-            </div>
-          </div>
-          <div class="client-logo-one-wrap">
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e753a03faccfeb91e6_Client-logo-01.svg"
-                loading="lazy"
-                alt="Client-logo-01"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e71be5276ceebb8e89_Client-logo-02.svg"
-                loading="lazy"
-                alt="Client-logo-02"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e7510f68fc4d688e31_Client-logo-03.svg"
-                loading="lazy"
-                alt="Client-logo-03"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e6ce17a4f516de8303_Client-logo-04.svg"
-                loading="lazy"
-                alt="Client-logo-04"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e8f744754ce95061a0_Client-logo-05.svg"
-                loading="lazy"
-                alt="Client-logo-05"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5eaa3230a7a6bb76372_Client-logo-06.svg"
-                loading="lazy"
-                alt="Client-logo-06"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e71be5276ceebb8e89_Client-logo-02.svg"
-                loading="lazy"
-                alt="Client-logo-02"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e753a03faccfeb91e6_Client-logo-01.svg"
-                loading="lazy"
-                alt="Client-logo-01"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e7510f68fc4d688e31_Client-logo-03.svg"
-                loading="lazy"
-                alt="Client-logo-03"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e6ce17a4f516de8303_Client-logo-04.svg"
-                loading="lazy"
-                alt="Client-logo-04"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5e8f744754ce95061a0_Client-logo-05.svg"
-                loading="lazy"
-                alt="Client-logo-05"
-                class="client-one-logo"
-              />
-            </div>
-            <div class="client-log-one">
-              <img
-                src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6970b5eaa3230a7a6bb76372_Client-logo-06.svg"
-                loading="lazy"
-                alt="Client-logo-06"
-                class="client-one-logo"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-gap padding-top-0">
+    <section class="section-gap padding-top-0" style="margin-top: 30px;">
       <div class="w-layout-blockcontainer container w-container">
         <div class="heading-subtitle center">
           <div class="subtitle-head-wrap">
             <div class="subtitle-left-icon"></div>
-            <div class="subtitle-head">Know more</div>
+            <div class="subtitle-head">Expert Guidance</div>
           </div>
           <div class="heading-title-animation">
-            <h2 class="heading-title team-heading">Skilled team</h2>
-            <div class="title-overlay global-bg"></div>
+            <h2 class="heading-title">Meet Our Specialists</h2>
+            <div class="title-overlay light-bg"></div>
+          </div>
+          <div class="heading-subheading-desc-wrap">
+            <div class="heading-subheading-desc">
+              Our diverse team brings together experts from various fields to
+              provide comprehensive support tailored to your unique journey.
+            </div>
           </div>
         </div>
         <div class="team-one service-page w-dyn-list">
@@ -1454,7 +892,7 @@
             </div>
           </div>
         </div>
-        <div class="button-wrap btn-center">
+        <!-- <div class="button-wrap btn-center">
           <a
             href="our-team.html"
             data-wf--button--variant="secondary-bg"
@@ -1478,7 +916,7 @@
                   class="button-arrow"
                 />
               </div></div
-          ></a>
+          ></a> -->
         </div>
       </div>
     </section>
@@ -1504,9 +942,9 @@
                 <div class="testimonial-slide w-slide">
                   <div class="testimonial-one">
                     <div class="testimonial-one-desc">
-                      “They understood our brand perfectly and delivered
+                      â€œThey understood our brand perfectly and delivered
                       campaigns that truly connected with our audience.
-                      Excellent creativity and execution!”
+                      Excellent creativity and execution!â€
                     </div>
                     <div class="testimonial-one-detail-wrap">
                       <div class="testimonial-one-image-wrap">
@@ -1527,9 +965,9 @@
                 <div class="testimonial-slide w-slide">
                   <div class="testimonial-one">
                     <div class="testimonial-one-desc">
-                      “They understood our brand perfectly and delivered
+                      â€œThey understood our brand perfectly and delivered
                       campaigns that truly connected with our audience.
-                      Excellent creativity and execution!”
+                      Excellent creativity and execution!â€
                     </div>
                     <div class="testimonial-one-detail-wrap">
                       <div class="testimonial-one-image-wrap">
@@ -1550,9 +988,9 @@
                 <div class="testimonial-slide w-slide">
                   <div class="testimonial-one">
                     <div class="testimonial-one-desc">
-                      “They understood our brand perfectly and delivered
+                      â€œThey understood our brand perfectly and delivered
                       campaigns that truly connected with our audience.
-                      Excellent creativity and execution!”
+                      Excellent creativity and execution!â€
                     </div>
                     <div class="testimonial-one-detail-wrap">
                       <div class="testimonial-one-image-wrap">
@@ -1601,13 +1039,39 @@
             </div>
           </div>
           <div class="testimonial-counter-bottom-text">
-            We specialize in creating, developing, and managing a brand’s
+            We specialize in creating, developing, and managing a brandâ€™s
             identity to help businesses stand out in the marketplace and connect
             with their target audience.
           </div>
         </div>
       </div>
     </section>
+    <!-- <section class="section-gap bg-dark" style="padding: 100px 0;">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="cta-one-wrap" style="text-align: center;">
+          <div class="heading-title-animation">
+            <h2 class="heading-title white-text">Ready to work with our experts?</h2>
+            <div class="title-overlay global-bg"></div>
+          </div>
+          <div class="button-wrap" style="margin-top: 40px; display: flex; justify-content: center;">
+            <a href="contact.html" class="button-link w-inline-block" data-wf--button--variant="secondary-bg">
+              <div class="button-hover-overlay"></div>
+              <div class="button-text-wrapper">
+                <div class="button-text-wrap">
+                  <div class="button-text">Get in Touch</div>
+                  <div class="button-text-hover">Get in Touch</div>
+                </div>
+              </div>
+              <div class="button-arrow-wrapper">
+                <div class="button-arrow-wrap">
+                  <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg" loading="lazy" width="20" height="20" alt="button-arrow" class="button-arrow" />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section> -->
     <footer class="footer">
       <div class="footer-wrap">
         <img
@@ -1744,3 +1208,4 @@
     ></script>
   </body>
 </html>
+
