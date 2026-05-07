@@ -2,22 +2,19 @@
 <!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Fri Apr 03 2026 09:26:28 GMT+0000 (Coordinated Universal Time) -->
 <html
   data-wf-domain="mercket.webflow.io"
-  data-wf-page="6944f1597ac277b25076cc9c"
+  data-wf-page="6944f1597ac277b25076cc9e"
   data-wf-site="6944f1597ac277b25076ccab"
   lang="en"
 >
   <head>
     <meta charset="utf-8" />
     <link href="https://cdn.prod.website-files.com" rel="preconnect" />
-    <title>Our Team | Mercket - Webflow HTML website template</title>
+    <title>Our Team | Talentsza</title>
     <meta
       content="A professional consultant Webflow theme built for business advisors, coaches, and consulting firms. Clean layouts, structured sections, and conversion-focused design help you build trust and generate leads."
       name="description"
     />
-    <meta
-      content="Our Team | Mercket - Webflow HTML website template"
-      property="og:title"
-    />
+    <meta content="Our Team | Talentsza" property="og:title" />
     <meta
       content="A professional consultant Webflow theme built for business advisors, coaches, and consulting firms. Clean layouts, structured sections, and conversion-focused design help you build trust and generate leads."
       property="og:description"
@@ -26,10 +23,7 @@
       content="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/69745114f79d27f3ffe71b47_graph.webp"
       property="og:image"
     />
-    <meta
-      content="Our Team | Mercket - Webflow HTML website template"
-      property="twitter:title"
-    />
+    <meta content="Our Team | Talentsza" property="twitter:title" />
     <meta
       content="A professional consultant Webflow theme built for business advisors, coaches, and consulting firms. Clean layouts, structured sections, and conversion-focused design help you build trust and generate leads."
       property="twitter:description"
@@ -52,6 +46,47 @@
       .team-one-preview {
         object-fit: contain !important;
         background-color: var(--light-color) !important;
+      }
+      .breadcrumb-section {
+        background-image: url("/webflow-pages/assets/SkilledTeam.jpeg") !important;
+      }
+      /* Expertise Section Alignment & Styling */
+      .icon-style-five-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 30px !important;
+        align-items: start !important;
+      }
+      .icon-style-five {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: left !important;
+      }
+      .icon-style-five-header {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+      }
+      .icon-style-five-title {
+        margin: 0 !important;
+        line-height: 1.2 !important;
+      }
+      .icon-style-five-icon-wrap {
+        background-color: #ff7a00 !important; /* Brand Orange */
+        flex-shrink: 0 !important;
+      }
+      @media (max-width: 991px) {
+        .icon-style-five-wrap {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        .breadcrumb-desc {
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          color: #ffffff !important;
+        }
       }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -92,83 +127,125 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfilePage",
+        "@type": "CollectionPage",
         "name": "Our Team",
+        "description": "Meet our professional team at Talentsza.",
         "url": "/our-team",
         "inLanguage": "en",
-        "description": "Meet the professionals behind our work, bringing together strategy, creativity, and expertise to deliver impactful marketing solutions and consistent results.",
         "mainEntity": {
-          "@type": "Organization",
-          "name": "Mercket",
-          "url": "/",
-          "email": "example@pbmit.com",
-          "telephone": "+1-234-567-89",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "2972 Westheimer Rd.",
-            "addressLocality": "Santa Ana",
-            "addressRegion": "Illinois"
-          },
-          "member": [
+          "@type": "ItemList",
+          "itemListElement": [
             {
-              "@type": "Person",
-              "name": "Revathi Karthikeyan",
-              "url": "/team/ronald-benson",
-              "jobTitle": "Founder",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/Raj.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "HR Solutions Service",
+                "description": "Reference Checks",
+                "url": "/project/hr-solutions",
+                "datePublished": "2026-01-15",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098b593ae75c0a90a7cf9_project-01.jpg"
+                },
+                "keywords": "Investment, HR Solutions"
               }
             },
             {
-              "@type": "Person",
-              "name": "Karun Krishna Rajendran",
-              "url": "/team/heanri-dokanai",
-              "jobTitle": "CEO",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/Karun.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "Marketing solution",
+                "description": "Quality Check",
+                "url": "/project/marketing-solution",
+                "datePublished": "2026-01-18",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098c7a548cb3ee6796579_project-02.jpg"
+                },
+                "keywords": "Marketing"
               }
             },
             {
-              "@type": "Person",
-              "name": "Rengabashyam S",
-              "url": "/team/robert-jhonson",
-              "jobTitle": "CBO",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/BAsher.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "Engagement Growth",
+                "description": "Content Manage",
+                "url": "/project/engagement-growth",
+                "datePublished": "2026-01-30",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098d454b43d2484c90c39_project-03.jpg"
+                },
+                "keywords": "Business, Content Management"
               }
             },
             {
-              "@type": "Person",
-              "name": "Sreeja U",
-              "url": "/team/marko-daniel",
-              "jobTitle": "Co-Founder",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/shreeju.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 4,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "Content marketing",
+                "description": "Advertising",
+                "url": "/project/content-marketing",
+                "datePublished": "2026-01-30",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098e11efafe49f0c71634_project-04.jpg"
+                },
+                "keywords": "Finance, Advertising"
               }
             },
             {
-              "@type": "Person",
-              "name": "MS Karthikeyan.",
-              "url": "/team/sony-miltar",
-              "jobTitle": "CFO / Accounts Leads",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/Karthick.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "Campaign management",
+                "description": "Social Management",
+                "url": "/project/campaign-management",
+                "datePublished": "2026-01-14",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098ec880a624b315c70ee_project-05.jpg"
+                },
+                "keywords": "Investment, Social Management"
               }
             },
             {
-              "@type": "Person",
-              "name": "Sridharan Pandi",
-              "url": "/team/jake-nicholson",
-              "jobTitle": "COO",
-              "image": {
-                "@type": "ImageObject",
-                "url": "/webflow-pages/assets/Sridhar.jpeg?v=1"
+              "@type": "ListItem",
+              "position": 6,
+              "item": {
+                "@type": "CreativeWork",
+                "name": "Revenue Optimization",
+                "description": "Consulting",
+                "url": "/project/revenue-optimization",
+                "datePublished": "2026-01-11",
+                "image": {
+                  "@type": "ImageObject",
+                  "url": "https://cdn.prod.website-files.com/6944f1597ac277b25076ccb5/697098f862daa4fa1a01f2b8_project-06.jpg"
+                },
+                "keywords": "Business, Consulting"
               }
+            }
+          ]
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Our Team", "item": "/our-team"
             }
           ]
         }
@@ -206,50 +283,25 @@
                       </div></a
                     >
                   </li>
+                  
                   <li class="nav-list">
-                    <div
-                      data-delay="500"
-                      data-hover="true"
-                      class="dropdown-nav w-dropdown"
+                    <a href="about-us.html" class="nav-link w-inline-block"
+                      ><div class="nav-text-wrap">
+                        <div class="nav-text">About Us</div>
+                      </div></a
                     >
-                      <div class="dropdown-toggle w-dropdown-toggle">
-                        <div class="nav-link">
-                          <div class="nav-text-wrap">
-                            <div class="nav-text">Pages</div>
-                          </div>
-                        </div>
-                        <div class="down-icon w-icon-dropdown-toggle"></div>
-                      </div>
-                      <nav class="dropdown-list _w-auto w-dropdown-list">
-                        <div class="mega-menu-column-wrap">
-                          <div class="mega-menu-column">
-                            <a
-                              href="about-us.html"
-                              class="dropdown-link w-dropdown-link"
-                              >About Us</a
-                            ><a
-                              href="our-team.html"
-                              aria-current="page"
-                              class="dropdown-link w-dropdown-link w--current"
-                              >Our Team</a
-                            >
-                          </div>
-                          
-                        </div>
-                      </nav>
-                    </div>
+                  </li>
+                  <li class="nav-list">
+                    <a href="our-team.html" class="nav-link w-inline-block"
+                      ><div class="nav-text-wrap">
+                        <div class="nav-text">Our Team</div>
+                      </div></a
+                    >
                   </li>
                   <li class="nav-list">
                     <a href="services.html" class="nav-link w-inline-block"
                       ><div class="nav-text-wrap">
                         <div href="#" class="nav-text">Services</div>
-                      </div></a
-                    >
-                  </li>
-                  <li class="nav-list">
-                    <a href="projects.html" class="nav-link w-inline-block"
-                      ><div class="nav-text-wrap">
-                        <div href="#" class="nav-text">Portfolio</div>
                       </div></a
                     >
                   </li>
@@ -328,11 +380,11 @@
         </div>
       </div>
     </header>
-    <section class="breadcrumb-section _02">
+    <section class="breadcrumb-section">
       <div class="w-layout-blockcontainer container-large w-container">
         <div class="breadcrumb-wrap">
           <div class="breadcrumb-title-animation">
-            <h2 class="breadcrumb-heading-title">Our Experts</h2>
+            <h2 class="breadcrumb-heading-title">Skilled Team</h2>
           </div>
         </div>
         <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
@@ -341,12 +393,12 @@
               <a href="#" class="breadcrumb-pages-text underline">Home</a>
               <div class="dashed">/</div>
             </div>
-            <div class="breadcrumb-pages-text">Our Team</div>
+            <div class="breadcrumb-pages-text">Team</div>
           </div>
           <div class="breadcrumb-desc-wrap">
             <div class="breadcrumb-desc">
-              A passionate team dedicated to delivering innovative and
-              results-driven solutions.
+              Meet the visionaries, strategists, and experts behind Talentsza,
+              dedicated to your professional growth and success.
             </div>
           </div>
         </div>
@@ -354,12 +406,82 @@
     </section>
     <section class="section-gap">
       <div class="w-layout-blockcontainer container w-container">
-        <div class="team-one w-dyn-list">
+        <div class="heading-subtitle center">
+          <div class="subtitle-head-wrap">
+            <div class="subtitle-left-icon"></div>
+            <div class="subtitle-head">Why Choose Us</div>
+          </div>
+          <div class="heading-title-animation">
+            <h2 class="heading-title">Our Strategic Excellence</h2>
+            <div class="title-overlay light-bg"></div>
+          </div>
+          <div class="heading-subheading-desc-wrap">
+            <div class="heading-subheading-desc">
+              At Talentsza, we bring together a powerhouse of expertise dedicated to unlocking your potential and driving real-world success.
+            </div>
+          </div>
+        </div>
+        <div class="icon-style-five-wrap" style="margin-top: 50px;">
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f6cd3de1c5374c545dfad_trophy.svg" alt="trophy" class="icon-style-five-icon" />
+              </div>
+              <div class="icon-style-five-title text-style-h2">Expert Mentorship</div>
+            </div>
+            <div class="icon-style-five-desc">
+              Personalized guidance from industry leaders with decades of experience in career coaching and skill development.
+            </div>
+          </div>
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63877a91720e6dc8e738_icon-02.svg" alt="icon-02" class="icon-style-five-icon" />
+              </div>
+              <div class="icon-style-five-title text-style-h2">Global Insights</div>
+            </div>
+            <div class="icon-style-five-desc">
+              Strategic understanding of both domestic and international markets, giving you a competitive edge in any field.
+            </div>
+          </div>
+          <div class="icon-style-five">
+            <div class="icon-style-five-header">
+              <div class="icon-style-five-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63895edaf4f4647fcd70_icon-03.svg" alt="icon-03" class="icon-style-five-icon" />
+              </div>
+              <div class="icon-style-five-title text-style-h2">Proven Results</div>
+            </div>
+            <div class="icon-style-five-desc">
+              A track record of helping thousands of professionals and students secure high-impact roles and top-tier admissions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-gap padding-top-0" style="margin-top: 30px;">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="heading-subtitle center">
+          <div class="subtitle-head-wrap">
+            <div class="subtitle-left-icon"></div>
+            <div class="subtitle-head">Expert Guidance</div>
+          </div>
+          <div class="heading-title-animation">
+            <h2 class="heading-title">Meet Our Specialists</h2>
+            <div class="title-overlay light-bg"></div>
+          </div>
+          <div class="heading-subheading-desc-wrap">
+            <div class="heading-subheading-desc">
+              Our diverse team brings together experts from various fields to
+              provide comprehensive support tailored to your unique journey.
+            </div>
+          </div>
+        </div>
+        <div class="team-one service-page w-dyn-list">
           <div role="list" class="team-one-list detail-page-list w-dyn-items">
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/ronald-benson.html"
+                  href="team/revathi-karthikeyan.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="Revathi Karthikeyan"
@@ -370,7 +492,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/ronald-benson.html" class="text-style-h2"
+                      <a href="team/revathi-karthikeyan.html" class="text-style-h2"
                         >Revathi Karthikeyan</a
                       >
                     </div>
@@ -406,7 +528,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/ronald-benson.html"
+                        href="team/revathi-karthikeyan.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -422,7 +544,7 @@
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/heanri-dokanai.html"
+                  href="team/karun-krishna.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="Karun Krishna Rajendran"
@@ -433,7 +555,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/heanri-dokanai.html" class="text-style-h2"
+                      <a href="team/karun-krishna.html" class="text-style-h2"
                         >Karun Krishna Rajendran</a
                       >
                     </div>
@@ -469,7 +591,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/heanri-dokanai.html"
+                        href="team/karun-krishna.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -485,7 +607,7 @@
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/robert-jhonson.html"
+                  href="team/rengabashyam-s.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="Rengabashyam S"
@@ -496,7 +618,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/robert-jhonson.html" class="text-style-h2"
+                      <a href="team/rengabashyam-s.html" class="text-style-h2"
                         >Rengabashyam S</a
                       >
                     </div>
@@ -532,7 +654,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/robert-jhonson.html"
+                        href="team/rengabashyam-s.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -548,7 +670,7 @@
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/marko-daniel.html"
+                  href="team/sreeja-u.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="Sreeja U"
@@ -559,7 +681,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/marko-daniel.html" class="text-style-h2"
+                      <a href="team/sreeja-u.html" class="text-style-h2"
                         >Sreeja U</a
                       >
                     </div>
@@ -595,7 +717,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/marko-daniel.html"
+                        href="team/sreeja-u.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -611,7 +733,7 @@
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/sony-miltar.html"
+                  href="team/ms-karthikeyan.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="MS Karthikeyan"
@@ -622,7 +744,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/sony-miltar.html" class="text-style-h2"
+                      <a href="team/ms-karthikeyan.html" class="text-style-h2"
                         >MS Karthikeyan.</a
                       >
                     </div>
@@ -658,7 +780,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/sony-miltar.html"
+                        href="team/ms-karthikeyan.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -674,7 +796,7 @@
             <div role="listitem" class="team-one-item w-dyn-item">
               <div class="team-one-wrap">
                 <a
-                  href="team/jake-nicholson.html"
+                  href="team/sridharan-pandi.html"
                   class="team-one-image-wrap w-inline-block"
                   ><img
                     alt="Sridharan Pandi"
@@ -685,7 +807,7 @@
                 <div class="team-one-inner">
                   <div class="team-one-title-wrap">
                     <div>
-                      <a href="team/jake-nicholson.html" class="text-style-h2"
+                      <a href="team/sridharan-pandi.html" class="text-style-h2"
                         >Sridharan Pandi</a
                       >
                     </div>
@@ -721,7 +843,7 @@
                     </div>
                     <div>
                       <a
-                        href="team/jake-nicholson.html"
+                        href="team/sridharan-pandi.html"
                         class="team-one-link w-inline-block"
                         ><img
                           src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63838b5e89fa89104bb3_down-left.svg"
@@ -736,8 +858,186 @@
             </div>
           </div>
         </div>
+        <!-- <div class="button-wrap btn-center">
+          <a
+            href="our-team.html"
+            data-wf--button--variant="secondary-bg"
+            data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
+            class="button-link w-inline-block"
+            ><div class="button-hover-overlay"></div>
+            <div class="button-text-wrapper">
+              <div class="button-text-wrap">
+                <div class="button-text">View all Members</div>
+                <div class="button-text-hover">View all Members</div>
+              </div>
+            </div>
+            <div class="button-arrow-wrapper">
+              <div class="button-arrow-wrap">
+                <img
+                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
+                  loading="lazy"
+                  width="20"
+                  height="20"
+                  alt="button-arrow"
+                  class="button-arrow"
+                />
+              </div></div
+          ></a> -->
+        </div>
       </div>
     </section>
+    <section class="section-margin">
+      <div class="testimonial-wrap">
+        <div class="testimonial-left-coumn">
+          <h2 class="testimonial-one-heading">People say</h2>
+          <div class="testimonial-wrapper">
+            <div
+              data-delay="4000"
+              data-animation="slide"
+              class="testimonial-slider w-slider"
+              data-autoplay="true"
+              data-easing="ease"
+              data-hide-arrows="false"
+              data-disable-swipe="false"
+              data-autoplay-limit="0"
+              data-nav-spacing="3"
+              data-duration="500"
+              data-infinite="true"
+            >
+              <div class="testimonial-list w-slider-mask">
+                <div class="testimonial-slide w-slide">
+                  <div class="testimonial-one">
+                    <div class="testimonial-one-desc">
+                      â€œThey understood our brand perfectly and delivered
+                      campaigns that truly connected with our audience.
+                      Excellent creativity and execution!â€
+                    </div>
+                    <div class="testimonial-one-detail-wrap">
+                      <div class="testimonial-one-image-wrap">
+                        <img
+                          loading="lazy"
+                          src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6944f1597ac277b25076cfef_testimonial-img-01.jpg"
+                          alt="testimonial-img-01"
+                          class="testimonial-one-image"
+                        />
+                      </div>
+                      <div class="testimonial-one-title-wrap">
+                        <div class="text-style-h4">Revathi Karthikeyan</div>
+                        <div class="category">Lead Supervisor</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-slide w-slide">
+                  <div class="testimonial-one">
+                    <div class="testimonial-one-desc">
+                      â€œThey understood our brand perfectly and delivered
+                      campaigns that truly connected with our audience.
+                      Excellent creativity and execution!â€
+                    </div>
+                    <div class="testimonial-one-detail-wrap">
+                      <div class="testimonial-one-image-wrap">
+                        <img
+                          loading="lazy"
+                          src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6944f1597ac277b25076cfab_testimonial-img-02.jpg"
+                          alt="testimonial-img-02"
+                          class="testimonial-one-image"
+                        />
+                      </div>
+                      <div class="testimonial-one-title-wrap">
+                        <div class="text-style-h4">Revathi Karthikeyan</div>
+                        <div class="category">Lead Supervisor</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-slide w-slide">
+                  <div class="testimonial-one">
+                    <div class="testimonial-one-desc">
+                      â€œThey understood our brand perfectly and delivered
+                      campaigns that truly connected with our audience.
+                      Excellent creativity and execution!â€
+                    </div>
+                    <div class="testimonial-one-detail-wrap">
+                      <div class="testimonial-one-image-wrap">
+                        <img
+                          loading="lazy"
+                          src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/6944f1597ac277b25076cf9a_testimonial-img-03.jpg"
+                          alt="testimonial-img-03"
+                          class="testimonial-one-image"
+                        />
+                      </div>
+                      <div class="testimonial-one-title-wrap">
+                        <div class="text-style-h4">Revathi Karthikeyan</div>
+                        <div class="category">Lead Supervisor</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testimonial-slider-arrow right w-slider-arrow-left">
+                <img
+                  src="assets/cdn.prod.website-files.com/6944f1597ac277b25076ccab/694530ac26b5a548b811034c_up-right-arrow.png"
+                  loading="lazy"
+                  alt="up-right-arrow"
+                  class="slider-arrow"
+                />
+              </div>
+              <div class="testimonial-slider-arrow w-slider-arrow-right">
+                <img
+                  src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/694530ac26b5a548b811034c_up-right-arrow.png"
+                  loading="lazy"
+                  alt="up-right-arrow"
+                  class="slider-arrow"
+                />
+              </div>
+              <div class="display-none w-slider-nav w-slider-nav-invert"></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-right-column">
+          <div class="testimonial-counter-wrap">
+            <div class="testimonial-counter-title">Ads Clicks</div>
+            <div class="counter-style-five">
+              <div class="counter-numbers five">
+                <div class="single-number">+35%</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-counter-bottom-text">
+            We specialize in creating, developing, and managing a brandâ€™s
+            identity to help businesses stand out in the marketplace and connect
+            with their target audience.
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="section-gap bg-dark" style="padding: 100px 0;">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="cta-one-wrap" style="text-align: center;">
+          <div class="heading-title-animation">
+            <h2 class="heading-title white-text">Ready to work with our experts?</h2>
+            <div class="title-overlay global-bg"></div>
+          </div>
+          <div class="button-wrap" style="margin-top: 40px; display: flex; justify-content: center;">
+            <a href="contact.html" class="button-link w-inline-block" data-wf--button--variant="secondary-bg">
+              <div class="button-hover-overlay"></div>
+              <div class="button-text-wrapper">
+                <div class="button-text-wrap">
+                  <div class="button-text">Get in Touch</div>
+                  <div class="button-text-hover">Get in Touch</div>
+                </div>
+              </div>
+              <div class="button-arrow-wrapper">
+                <div class="button-arrow-wrap">
+                  <img src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg" loading="lazy" width="20" height="20" alt="button-arrow" class="button-arrow" />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section> -->
     <footer class="footer">
       <div class="footer-wrap">
         <img
@@ -814,38 +1114,7 @@
             </div>
             <div class="footer-bottom">
               <div class="footer-bottom-wrap">
-                <div class="footer-bottom-link-wrap">
-                  <div class="footer-bottom-link-text">
-                    Copyright © 2025
-                    <a href="index.html" class="footer-bottom-link">Mercket</a>,
-                    Powered by
-                    <a href="https://webflow.com/" class="footer-bottom-link"
-                      >Webflow</a
-                    >
-                  </div>
-                </div>
-                <div class="footer-bottom-link-wrap">
-                  <div class="footer-bottom-link-text">
-                    <a
-                      href="utility-pages/changelog.html"
-                      class="footer-bottom-link"
-                      >Changelog</a
-                    >
-                    |
-                    <a
-                      href="utility-pages/style-guide.html"
-                      class="footer-bottom-link"
-                      >Style Guide</a
-                    >
-                    |
-                    <a
-                      href="utility-pages/licenses.html"
-                      class="footer-bottom-link"
-                      >License</a
-                    >
-                    | <a href="404.html" class="footer-bottom-link">404</a>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -869,8 +1138,9 @@
       type="text/javascript"
     ></script>
     <script
-      src="assets/cdn.prod.website-files.com/6944f1597ac277b25076ccab/js/webflow.160b5c6f.0e9b7a3ecd0ca4d1.js"
+      src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/js/webflow.77ae0881.ad5b305e7278efd9.js"
       type="text/javascript"
     ></script>
   </body>
 </html>
+
