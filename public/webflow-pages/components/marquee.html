@@ -1,0 +1,99 @@
+<section class="marquee-section">
+  <div class="marquee">
+    <div id="marquee-list-1" class="marquee-wrap">
+      <!-- Logos will be injected here -->
+    </div>
+    <div id="marquee-list-2" class="marquee-wrap">
+      <!-- Duplicate logos -->
+    </div>
+  </div>
+  
+  <style>
+    .client-logo {
+      height: 90px !important;
+      width: auto !important;
+      margin: 0 50px !important;
+      opacity: 1;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    .client-logo:hover {
+      transform: scale(1.05); /* Added a subtle scale effect instead of color change */
+    }
+    /* Force animation to keep running on hover */
+    .marquee:hover .marquee-wrap {
+      animation-play-state: running !important;
+    }
+    .marquee-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 120px;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    .marquee-section {
+      padding-top: 0 !important;
+      margin-top: -20px !important; /* Pulls it up slightly if the above section has gap */
+    }
+  </style>
+
+  <script>
+    (async function() {
+      // Use a unique selector to avoid conflicts if IDs are reused
+      const wraps = document.querySelectorAll('.marquee-wrap');
+      if (wraps.length < 2) return;
+
+      const folderPath = '/webflow-pages/assets/Clients/';
+      const foundLogos = [];
+
+      // Probing function: Try to find up to 20 logos
+      for (let i = 1; i <= 20; i++) {
+        const logoName = `logo-${i}.png`;
+        try {
+          const res = await fetch(folderPath + logoName, { method: 'HEAD' });
+          if (res.ok) {
+            foundLogos.push(logoName);
+          } else if (i > 2) {
+            // Stop if we hit a gap after the first two
+            break;
+          }
+        } catch (e) {
+          break;
+        }
+      }
+
+      if (foundLogos.length > 0) {
+        const createSet = () => {
+          const fragment = document.createDocumentFragment();
+          foundLogos.forEach(logo => {
+            const img = document.createElement('img');
+            img.src = folderPath + logo;
+            img.className = 'client-logo';
+            img.alt = 'Client Logo';
+            // Ensure the image exists before adding it
+            img.onerror = () => img.remove();
+            fragment.appendChild(img);
+          });
+          return fragment;
+        };
+
+        // Populate both wraps for the infinite effect
+        wraps[0].innerHTML = '';
+        wraps[1].innerHTML = '';
+        wraps[0].appendChild(createSet());
+        wraps[1].appendChild(createSet());
+        
+        // Final layout trigger
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+            if (window.Webflow && window.Webflow.require) {
+                const ix2 = window.Webflow.require('ix2');
+                if (ix2) ix2.init();
+            }
+        }, 300);
+      } else {
+        console.warn('No logos found in ' + folderPath);
+      }
+    })();
+  </script>
+</section>
