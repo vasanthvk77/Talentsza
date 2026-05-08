@@ -29,24 +29,50 @@
   <link href="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/css/mercket.webflow.shared.3eb5ac14d.min.css"
     rel="stylesheet" type="text/css" />
     <style>
-      @media (min-width: 992px) {
-        html.w-mod-js:not(.w-mod-ix) [data-w-id="b094c08e-ead0-760d-130a-4af08c8efc5a"] {
-          opacity: 0;
-        }
+      /* Visibility Fix - Targeted to prevent layout shifts */
+      [data-w-id], 
+      .heading-title-animation, 
+      .breadcrumb-title-animation {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
       }
 
-      /* Team image consistency fix */
-      .team-one-preview {
-        object-fit: contain !important;
-        background-color: var(--light-color) !important;
+      /* Unique Services Hero Styling */
+      .native-services-hero {
+        background-color: #fff !important;
+        padding-top: 110px !important;
+        padding-bottom: 20px !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
       }
+      .native-hero-title {
+        color: #111 !important;
+        font-size: 56px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+      }
+      .native-hero-desc {
+        margin-top: 15px !important;
+        color: #666 !important;
+        font-size: 18px !important;
+        max-width: 600px !important;
+        text-align: center !important;
+        line-height: 1.6 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
       @media (max-width: 991px) {
-        .breadcrumb-desc {
-          display: block !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          color: #ffffff !important;
-        }
+        .native-hero-title { font-size: 42px !important; }
+        .native-services-hero { padding-top: 100px !important; }
+      }
+      @media (max-width: 767px) {
+        .native-hero-title { font-size: 32px !important; }
+        .native-services-hero { padding-top: 90px !important; }
       }
     </style>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -135,7 +161,7 @@
     </script>
     <style>
       .breadcrumb-section._04 {
-        background-image: url("/webflow-pages/assets/service-hero-bg.jpg") !important;
+        background-image: url("") !important;
       }
     </style>
   </head>
@@ -237,30 +263,15 @@
       </div>
     </div>
   </header>
-  <section class="breadcrumb-section _04">
-    <div class="w-layout-blockcontainer container-large w-container">
-      <div class="breadcrumb-wrap">
-        <div class="breadcrumb-title-animation">
-          <h2 class="breadcrumb-heading-title">Building Careers</h2>
-        </div>
-      </div>
-      <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
-        <div class="breadcrumb-pages-map">
-          <div class="breadcrumb-pages-text-wrap">
-            <a href="#" class="breadcrumb-pages-text underline">Home</a>
-            <div class="dashed">/</div>
-          </div>
-          <div class="breadcrumb-pages-text">Service</div>
-        </div>
-        <div class="breadcrumb-desc-wrap" style="display: block !important;">
-          <div class="breadcrumb-desc">
-            Designed to help individuals grow and succeed in today’s competitive world.
-          </div>
-        </div>
+  <section class="native-services-hero " style="margin-top: 40px;">
+    <div class="w-layout-blockcontainer container w-container">
+      <h2 class="native-hero-title">Building Careers</h2>
+      <div class="native-hero-desc">
+        Designed to help individuals grow and succeed in today’s competitive world.
       </div>
     </div>
   </section>
-  <section class="section-gap">
+  <section class="section-gap padding-top-0">
     <div class="overflow-hidden">
       <div class="w-layout-blockcontainer container w-container">
         <div class="home-two-about-flex">
