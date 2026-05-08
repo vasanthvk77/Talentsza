@@ -7,6 +7,26 @@
  * - Webflow pages rendered directly into the DOM (embedded)
  */
 
+// Centralized colors for specific dark sections (Footer, Services, Contact, etc.)
+const SECTION_DARK_BG = '#eceee6';
+const SECTION_DARK_TEXT = '#202020ff';
+const SECTION_FOOTER_OUTER_BG = '#ffffffff';
+
+///contact us page 1st column(Get in Touch Today box)
+const SECTION_CONTACT_BG = '#4c2158'; // Separate background for Contact Us section
+const SECTION_CONTACT_TEXT = '#ffffffff'; // Separate text color for Contact Us section
+
+/// Career Impact Section (Counter   Box)
+const SECTION_CAREER_BG = '#4c2158'; // Separate background for Career Impact section
+const SECTION_CAREER_TEXT = '#ffffff'; // Separate text color for Career Impact section
+const SECTION_CAREER_LOADING = '#ED6D00'; // Separate loading bar color for Career Impact section
+
+/// About Us CTA Section (Ready to unlock your global career?)
+const SECTION_CTA_BG = '#4c2158'; // Separate background for About Us CTA section
+const SECTION_CTA_TEXT = '#ffffffff'; // Separate text color for About Us CTA section
+const SECTION_CTA_BTN_BG = '#ffffffff'; // Separate button background for About Us CTA
+const SECTION_CTA_BTN_TEXT = '#4c2158'; // Separate button text for About Us CTA
+
 export const theme = {
   light: {
     text: '#6b6375',
@@ -16,9 +36,19 @@ export const theme = {
     codeBg: '#fff4eb',
     accent: '#ED6D00',
     purple: '#3e3640ff',
-    footerBg: '#23212f',
-    footerTextColor: '#ffffff',
-    accentBg: 'rgba(237, 109, 0, 0.1)', 
+    footerBg: SECTION_DARK_BG,
+    footerOuterBg: SECTION_FOOTER_OUTER_BG,
+    footerTextColor: SECTION_DARK_TEXT,
+    contactBg: SECTION_CONTACT_BG,
+    contactTextColor: SECTION_CONTACT_TEXT,
+    careerBg: SECTION_CAREER_BG,
+    careerTextColor: SECTION_CAREER_TEXT,
+    careerLoadingColor: SECTION_CAREER_LOADING,
+    ctaBg: SECTION_CTA_BG,
+    ctaTextColor: SECTION_CTA_TEXT,
+    ctaBtnBg: SECTION_CTA_BTN_BG,
+    ctaBtnTextColor: SECTION_CTA_BTN_TEXT,
+    accentBg: 'rgba(237, 109, 0, 0.1)',
     accentBorder: 'rgba(237, 109, 0, 0.5)',
     socialBg: 'rgba(237, 109, 0, 0.1)',
     shadow:
@@ -227,10 +257,11 @@ export function getThemeGlobalOverridesCss() {
     }
 
     /* Strip decorative background images from specific containers known to have watermarks */
-    .home-one-service-wrapper,
-    .home-one-service-wrap,
-    .service-one-list-wrap,
     .service-section,
+    .contact-sectiom,
+    .contact-us-heading-wrap,
+    .contact-us-form-wrap,
+    .cta-style-one-wrap,
     .section-gap,
     .footer-bg,
     .global-bg {
@@ -240,13 +271,32 @@ export function getThemeGlobalOverridesCss() {
     /* Footer background — outer shell white, inner wrap uses footerBg token */
     footer.footer,
     .footer {
-      background-color: #eceee6 !important;
+      background-color: ${theme.light.footerOuterBg} !important;
       background-image: none !important;
     }
 
     .footer-wrap,
-    .footer-inner {
+    .footer-inner,
+    .service-section {
       background: ${theme.light.footerBg} !important;
+    }
+
+    .cta-style-one-wrap {
+      background: ${theme.light.ctaBg} !important;
+    }
+
+    .cta-style-one-wrap .button-link {
+      background: ${theme.light.ctaBtnBg} !important;
+      border-radius: 100px !important;
+    }
+    
+    .cta-style-one-wrap .button-link * {
+      background: transparent !important;
+      background-image: none !important;
+    }
+
+    .contact-us-heading-wrap {
+      background: ${theme.light.contactBg} !important;
     }
 
     .footer-bottom {
@@ -256,8 +306,53 @@ export function getThemeGlobalOverridesCss() {
     .footer-link-text,
     .footer-contact-text,
     .footer-bottom-link-text,
-    .footer-bottom-link {
+    .footer-bottom-link,
+    .footer-social-icons .icon,
+    .service-one-title,
+    .service-one-number,
+    .service-heading,
+    .home-one-service-text,
+    .service-section .white-text {
       color: ${theme.light.footerTextColor} !important;
+    }
+
+    .cta-style-one-wrap .heading-title,
+    .cta-style-one-wrap p {
+      color: ${theme.light.ctaTextColor} !important;
+    }
+
+    .cta-style-one-wrap .button-text,
+    .cta-style-one-wrap .button-text-hover {
+      color: ${theme.light.ctaBtnTextColor} !important;
+    }
+
+    .contact-us-heading-wrap .white-text,
+    .contact-us-heading-wrap .white-desc-text,
+    .contact-us-heading-wrap .contact-social-icon-text,
+    .contact-us-heading-wrap .meta-icons {
+      color: ${theme.light.contactTextColor} !important;
+    }
+
+    .contact-us-heading-wrap .subtitle-left-icon {
+      background: ${theme.light.contactTextColor} !important;
+    }
+
+    .contact-us-heading-wrap .icon-style-six-icon {
+      color: ${theme.light.contactBg} !important;
+    }
+
+    /* Career Impact Section Centralization */
+    .home-one-about-one {
+      background: ${theme.light.careerBg} !important;
+    }
+
+    .home-one-about-one .white-text,
+    .home-one-about-one .counter-number {
+      color: ${theme.light.careerTextColor} !important;
+    }
+
+    .about-one-progress-line {
+      background-color: ${theme.light.careerLoadingColor} !important;
     }
 
     /* Compensate for fixed header on sub-pages (Home page usually handles this in hero) */
