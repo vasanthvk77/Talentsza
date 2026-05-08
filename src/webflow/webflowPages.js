@@ -42,6 +42,8 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
 
     case '/404':
       return `${WEBFLOW_PAGES_BASE}/404.html`
+    case '/post/the-future-of-jobs-skills-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/the-future-of-jobs-skills-2026.html`
   }
 
   // Dynamic pages
@@ -57,11 +59,18 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
 }
 
 export async function loadWebflowHtml(url) {
-  const res = await fetch(url, { cache: 'no-store' })
+  const absoluteUrl = new URL(url, window.location.origin).href
+  const res = await fetch(absoluteUrl + `?cb=${Date.now()}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error(`Failed to load Webflow HTML: ${url} (${res.status})`)
   }
   const rawHtml = await res.text()
+  
+  // Safety check: If we received the React SPA index instead of a Webflow page, treat it as a failure
+  if (rawHtml.includes('id="root"') || rawHtml.includes('src="/src/main.jsx"')) {
+    throw new Error(`Fetched SPA index instead of Webflow HTML for: ${url}`)
+  }
+  
   return transformWebflowHtml(rawHtml)
 }
 

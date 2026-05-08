@@ -178,6 +178,10 @@ export default function App() {
         />
         <Route path="/blog" element={<StaticWebflowRoute pathName="/blog" />} />
         <Route
+          path="/post/the-future-of-jobs-skills-2026"
+          element={<StaticWebflowRoute pathName="/post/the-future-of-jobs-skills-2026" />}
+        />
+        <Route
           path="/contact"
           element={<StaticWebflowRoute pathName="/contact" />}
         />
