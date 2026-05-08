@@ -1,4 +1,10 @@
 <section class="marquee-section">
+  <div class="marquee-header-container">
+    <div class="subtitle-head-wrap">
+      <div class="subtitle-left-icon"></div>
+      <div class="subtitle-head">Industrial Partners</div>
+    </div>
+  </div>
   <div class="marquee">
     <div id="marquee-list-1" class="marquee-wrap">
       <!-- Logos will be injected here -->
@@ -9,6 +15,12 @@
   </div>
   
   <style>
+    .marquee-header-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      margin-top: 0px;
+    }
     .client-logo {
       height: 90px !important;
       width: auto !important;
@@ -27,13 +39,14 @@
     .marquee-wrap {
       display: flex;
       align-items: center;
-      min-height: 120px;
+      min-height: 90px;
       margin-top: 0 !important;
       padding-top: 0 !important;
     }
     .marquee-section {
       padding-top: 0 !important;
-      margin-top: -20px !important; /* Pulls it up slightly if the above section has gap */
+      padding-bottom: 5px !important;
+      margin-top: -40px !important; /* Aggressively pulls it up */
     }
   </style>
 
