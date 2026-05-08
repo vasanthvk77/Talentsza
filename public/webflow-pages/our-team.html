@@ -42,13 +42,56 @@
       type="text/css"
     />
     <style>
+      /* Visibility Fix - Targeted to prevent layout shifts */
+      [data-w-id], 
+      .heading-title-animation, 
+      .breadcrumb-title-animation {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+
+      /* Unique Page Hero Styling */
+      .native-page-hero {
+        background-color: #fff !important;
+        padding-top: 110px !important;
+        padding-bottom: 20px !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      .native-hero-title {
+        color: #111 !important;
+        font-size: 56px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+      }
+      .native-hero-desc {
+        margin-top: 15px !important;
+        color: #666 !important;
+        font-size: 18px !important;
+        max-width: 600px !important;
+        text-align: center !important;
+        line-height: 1.6 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      @media (max-width: 991px) {
+        .native-hero-title { font-size: 42px !important; }
+        .native-page-hero { padding-top: 100px !important; }
+      }
+      @media (max-width: 767px) {
+        .native-hero-title { font-size: 32px !important; }
+        .native-page-hero { padding-top: 90px !important; }
+      }
+
       /* Team image consistency fix */
       .team-one-preview {
         object-fit: contain !important;
         background-color: var(--light-color) !important;
-      }
-      .breadcrumb-section {
-        background-image: url("/webflow-pages/assets/SkilledTeam.jpeg") !important;
       }
       /* Expertise Section Alignment & Styling */
       .icon-style-five-wrap {
@@ -80,12 +123,6 @@
         .icon-style-five-wrap {
           grid-template-columns: 1fr !important;
           gap: 40px !important;
-        }
-        .breadcrumb-desc {
-          display: block !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          color: #ffffff !important;
         }
       }
       /* Make Skilled Team center column sticky */
@@ -396,31 +433,16 @@
         </div>
       </div>
     </header>
-    <section class="breadcrumb-section">
-      <div class="w-layout-blockcontainer container-large w-container">
-        <div class="breadcrumb-wrap">
-          <div class="breadcrumb-title-animation">
-            <h2 class="breadcrumb-heading-title">Skilled Team</h2>
-          </div>
-        </div>
-        <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
-          <div class="breadcrumb-pages-map">
-            <div class="breadcrumb-pages-text-wrap">
-              <a href="#" class="breadcrumb-pages-text underline">Home</a>
-              <div class="dashed">/</div>
-            </div>
-            <div class="breadcrumb-pages-text">Team</div>
-          </div>
-          <div class="breadcrumb-desc-wrap">
-            <div class="breadcrumb-desc">
-              Meet the visionaries, strategists, and experts behind Talentsza,
-              dedicated to your professional growth and success.
-            </div>
-          </div>
+    <section class="native-page-hero" style="margin-top: 40px;">
+      <div class="w-layout-blockcontainer container w-container">
+        <h2 class="native-hero-title">Our Team</h2>
+        <div class="native-hero-desc">
+          Meet the visionaries, strategists, and experts behind Talentsza,
+          dedicated to your professional growth and success.
         </div>
       </div>
     </section>
-    <section class="section-gap">
+    <section class="">
       <div class="w-layout-blockcontainer container w-container">
         <div class="heading-subtitle center">
           <div class="subtitle-head-wrap">

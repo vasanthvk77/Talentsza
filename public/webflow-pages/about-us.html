@@ -48,27 +48,50 @@
       type="text/css"
     />
     <style>
-      @media (min-width: 992px) {
-        html.w-mod-js:not(.w-mod-ix)
-          [data-w-id="e120479d-ebb9-5976-ecb9-2431c697747f"] {
-          opacity: 0;
-        }
-        html.w-mod-js:not(.w-mod-ix)
-          [data-w-id="af4a6316-e907-781c-c003-53c38c0bccbe"] {
-          opacity: 0;
-        }
-        html.w-mod-js:not(.w-mod-ix)
-          [data-w-id="6e50f675-892c-dcac-ed08-abba1cab7a55"] {
-          opacity: 0;
-        }
-        html.w-mod-js:not(.w-mod-ix)
-          [data-w-id="b80c2fb9-9173-7436-1d6a-91257ee5a9b4"] {
-          opacity: 0;
-        }
-        html.w-mod-js:not(.w-mod-ix)
-          [data-w-id="b6bf19bd-92ce-4898-1c74-c4e3d77067c8"] {
-          opacity: 0;
-        }
+      /* Visibility Fix - Targeted to prevent layout shifts */
+      [data-w-id], 
+      .heading-title-animation, 
+      .breadcrumb-title-animation {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+
+      /* Unique Page Hero Styling */
+      .native-page-hero {
+        background-color: #fff !important;
+        padding-top: 110px !important;
+        padding-bottom: 20px !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      .native-hero-title {
+        color: #111 !important;
+        font-size: 56px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+      }
+      .native-hero-desc {
+        margin-top: 15px !important;
+        color: #666 !important;
+        font-size: 18px !important;
+        max-width: 600px !important;
+        text-align: center !important;
+        line-height: 1.6 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      @media (max-width: 991px) {
+        .native-hero-title { font-size: 42px !important; }
+        .native-page-hero { padding-top: 100px !important; }
+      }
+      @media (max-width: 767px) {
+        .native-hero-title { font-size: 32px !important; }
+        .native-page-hero { padding-top: 90px !important; }
       }
     </style>
     <style>
@@ -91,17 +114,6 @@
       .team-one-preview {
         object-fit: contain !important;
         background-color: var(--light-color) !important;
-      }
-      .breadcrumb-section {
-        background-image: url("/webflow-pages/assets/aboutus-hero-01.jpeg") !important;
-      }
-      @media (max-width: 991px) {
-        .breadcrumb-desc {
-          display: block !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          color: #ffffff !important;
-        }
       }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -236,17 +248,7 @@
         }
       }
     </script>
-    <style>
-      .breadcrumb-section {
-        background-image: url("/webflow-pages/assets/aboutus-hero-01.jpeg") !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        min-height: 400px;
-        display: flex;
-        align-items: center;
-      }
-    </style>
+
   </head>
   <body>
     <header class="header header-one">
@@ -377,32 +379,17 @@
       </div>
     </header>
 
-    <section class="breadcrumb-section" >
-      <div class="w-layout-blockcontainer container-large w-container">
-        <div class="breadcrumb-wrap">
-          <div class="breadcrumb-title-animation">
-            <h2 class="breadcrumb-heading-title">Who We Are</h2>
-          </div>
-        </div>
-        <div class="breadcrumb-bottom-content w-hidden-main w-hidden-medium">
-          <div class="breadcrumb-pages-map">
-            <div class="breadcrumb-pages-text-wrap">
-              <a href="#" class="breadcrumb-pages-text underline">Home</a>
-              <div class="dashed">/</div>
-            </div>
-            <div class="breadcrumb-pages-text">About Us</div>
-          </div>
-          <div class="breadcrumb-desc-wrap" style="display: block !important;">
-            <div class="breadcrumb-desc">
-              Empowering ambitious professionals with specialized training and 
-              connecting them to life-changing global career opportunities.
-            </div>
-          </div>
+    <section class="native-page-hero" style="margin-top: 70px;">
+      <div class="w-layout-blockcontainer container w-container">
+        <h2 class="native-hero-title">Who We Are</h2>
+        <div class="native-hero-desc">
+          Empowering ambitious professionals with specialized training and 
+          connecting them to life-changing global career opportunities.
         </div>
       </div>
     </section>
     <!-- NATIVE: About Us Content Section -->
-    <section class="section-gap">
+    <section class="" style="margin-bottom: 70px;">
       <div class="w-layout-blockcontainer container w-container">
         <div class="mission-native-layout" style="display: flex; gap: 60px; align-items: center; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 300px;">
@@ -451,10 +438,10 @@
     <section class="section-gap" style="padding-top: 0; padding-bottom: 20px;">
       <div class="w-layout-blockcontainer container w-container">
         <div class="heading-subtitle" style="text-align:center; margin-bottom:20px;">
-          <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;">
-            <div class="subtitle-left-icon"></div>
-            <div class="subtitle-head">Our Journey</div>
-          </div>
+          <div class="subtitle-head-wrap">
+                <div class="subtitle-left-icon"></div>
+                <div class="subtitle-head">Our Journey</div>
+              </div>
           <div class="heading-title-animation">
             <h2 class="heading-title" style="text-align:center;">A decade of empowering careers</h2>
           </div>
