@@ -182,6 +182,10 @@ export default function App() {
           element={<StaticWebflowRoute pathName="/post/the-future-of-jobs-skills-2026" />}
         />
         <Route
+          path="/post/top-study-abroad-trends-career-opportunities-2026"
+          element={<StaticWebflowRoute pathName="/post/top-study-abroad-trends-career-opportunities-2026" />}
+        />
+        <Route
           path="/contact"
           element={<StaticWebflowRoute pathName="/contact" />}
         />

@@ -44,6 +44,8 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
       return `${WEBFLOW_PAGES_BASE}/404.html`
     case '/post/the-future-of-jobs-skills-2026':
       return `${WEBFLOW_PAGES_BASE}/post/the-future-of-jobs-skills-2026.html`
+    case '/post/top-study-abroad-trends-career-opportunities-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/top-study-abroad-trends-career-opportunities-2026.html`
   }
 
   // Dynamic pages
