@@ -191,16 +191,39 @@ export function getThemeGlobalOverridesCss() {
       background: transparent !important;
     }
 
-    /* Targeted removal of the giant "M" watermark and legacy background artifacts */
-    /* Excluded .breadcrumb-section and .hero-one-section to keep actual content backgrounds */
-    .project-one-bg-image,
-    .counter-three-bg-pattern,
-    .service-overlay,
-    .title-overlay,
-    .text-title-overlay {
+    /* 
+       CORE FIXES: 
+       1. Global UI Fix - Suppress elusive shadow DOM overlays that cause full-page blurs 
+       2. Decorative Removals - Strip watermarks, problematic overlays, and hidden patterns
+       3. Hero Restoration - Force visibility and clarity for the main landing page hero
+    */
+
+    #preact-border-shadow-host, [id*="preact-border-shadow"],
+    .project-one-bg-image, .counter-three-bg-pattern, .service-overlay,
+    .title-overlay, .text-title-overlay, .overlay,
+    .hero-one-overlay-one, .hero-one-overlay-two, .hero-one-overlay-three {
       display: none !important;
       opacity: 0 !important;
       visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    /* Prevent blurs and forced hiding from Webflow IX2 on the Landing Page Hero */
+    .hero-one-section, .hero-one-wrap, .hero-one-slide, .hero-one-wrapper {
+      filter: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .hero-one-wrapper {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: flex !important;
+      transform: none !important;
+    }
+
+    .hero-one-section *, .hero-one-wrap *, .hero-one-slide * {
+      filter: none !important;
     }
 
     /* Strip decorative background images from specific containers known to have watermarks */
