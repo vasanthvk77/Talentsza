@@ -13,7 +13,7 @@ const SECTION_DARK_TEXT = '#202020ff';
 const SECTION_FOOTER_OUTER_BG = '#ffffffff';
 
 ///contact us page 1st column(Get in Touch Today box)
-const SECTION_CONTACT_BG = '#4c2158'; // Separate background for Contact Us section
+const SECTION_CONTACT_BG = '#ED6D00'; // Separate background for Contact Us section
 const SECTION_CONTACT_TEXT = '#ffffffff'; // Separate text color for Contact Us section
 
 /// Career Impact Section (Counter   Box)
