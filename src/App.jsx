@@ -186,6 +186,22 @@ export default function App() {
           element={<StaticWebflowRoute pathName="/post/top-study-abroad-trends-career-opportunities-2026" />}
         />
         <Route
+          path="/post/Industry-Ready-skills-2026"
+          element={<StaticWebflowRoute pathName="/post/Industry-Ready-skills-2026" />}
+        />
+        <Route
+          path="/post/choosing-right-career-path-2026"
+          element={<StaticWebflowRoute pathName="/post/choosing-right-career-path-2026" />}
+        />
+        <Route
+          path="/post/practical-training-internships-2026"
+          element={<StaticWebflowRoute pathName="/post/practical-training-internships-2026" />}
+        />
+        <Route
+          path="/post/role-soft-skills-career-2026"
+          element={<StaticWebflowRoute pathName="/post/role-soft-skills-career-2026" />}
+        />
+        <Route
           path="/contact"
           element={<StaticWebflowRoute pathName="/contact" />}
         />

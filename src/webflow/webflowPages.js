@@ -46,6 +46,14 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
       return `${WEBFLOW_PAGES_BASE}/post/the-future-of-jobs-skills-2026.html`
     case '/post/top-study-abroad-trends-career-opportunities-2026':
       return `${WEBFLOW_PAGES_BASE}/post/top-study-abroad-trends-career-opportunities-2026.html`
+    case '/post/Industry-Ready-skills-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/Industry-Ready-skills-2026.html`
+    case '/post/choosing-right-career-path-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/choosing-right-career-path-2026.html`
+    case '/post/practical-training-internships-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/practical-training-internships-2026.html`
+    case '/post/role-soft-skills-career-2026':
+      return `${WEBFLOW_PAGES_BASE}/post/role-soft-skills-career-2026.html`
   }
 
   // Dynamic pages
