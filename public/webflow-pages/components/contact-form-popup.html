@@ -1,0 +1,497 @@
+<!-- =============================================
+     CAREER ADVISOR CONTACT FORM POPUP TEMPLATE
+     Used in: index.html (and any page that needs the popup)
+     Trigger: onclick="openCareerAdvisorPopup()"
+     Close:   onclick="closeCareerAdvisorPopup()" or click backdrop
+     ============================================= -->
+
+<!-- POPUP BACKDROP -->
+<div id="career-advisor-popup-backdrop" class="ca-popup-backdrop" onclick="closeCareerAdvisorPopup()" aria-hidden="true"></div>
+
+<!-- POPUP MODAL -->
+<div id="career-advisor-popup" class="ca-popup-modal" role="dialog" aria-modal="true" aria-labelledby="ca-popup-title">
+  <!-- Close Button (top-right) -->
+  <button id="ca-popup-close-btn" class="ca-popup-close" onclick="closeCareerAdvisorPopup()" aria-label="Close popup">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <!-- Popup Inner Content -->
+  <div class="ca-popup-inner">
+    <!-- Left Info Panel -->
+    <div class="ca-popup-info-panel">
+      <div class="ca-popup-info-tag">Career Guidance</div>
+      <h2 id="ca-popup-title" class="ca-popup-info-heading">Talk to a Career Advisor</h2>
+      <p class="ca-popup-info-desc">
+        Whether you have questions, require expert guidance, or are ready to start your journey — we're here to help you succeed.
+      </p>
+      <div class="ca-popup-contact-list">
+        <div class="ca-popup-contact-item">
+          <div class="ca-popup-contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.71 19.79 19.79 0 0 1 1.61 3.1 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l1.27-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <span>+91-96266 26866</span>
+        </div>
+        <div class="ca-popup-contact-item">
+          <div class="ca-popup-contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <span>info@talentsza.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Form Panel -->
+    <div class="ca-popup-form-panel">
+      <div class="contact-form-wrap w-form">
+        <form
+          id="wf-form-Career-Advisor-Popup"
+          name="wf-form-Career-Advisor-Popup"
+          data-name="Career Advisor Popup"
+          method="post"
+          enctype="multipart/form-data"
+          class="contact-form"
+          onsubmit="handleCareerAdvisorFormSubmit(event)"
+        >
+          <div class="contact-form-grid">
+            <input
+              class="contact-form-input bg-light w-input"
+              maxlength="256"
+              name="Full-Name"
+              data-name="Full Name"
+              placeholder="Full Name *"
+              type="text"
+              id="Full-Name"
+              required=""
+            />
+            <input
+              class="contact-form-input bg-light w-input"
+              maxlength="256"
+              name="Phone-Number"
+              data-name="Phone Number"
+              placeholder="Phone Number *"
+              type="tel"
+              id="Phone-Number"
+              required=""
+            />
+            <input
+              class="contact-form-input bg-light w-input"
+              maxlength="256"
+              name="Email-Address"
+              data-name="Email Address"
+              placeholder="Email Address *"
+              type="email"
+              id="Email-Address"
+              required=""
+            />
+            <input
+              class="contact-form-input bg-light w-input"
+              maxlength="256"
+              name="Place"
+              data-name="Place"
+              placeholder="Place *"
+              type="text"
+              id="Place"
+              required=""
+            />
+            <input
+              class="contact-form-input bg-light w-input"
+              maxlength="256"
+              name="Education"
+              data-name="Education"
+              placeholder="Education *"
+              type="text"
+              id="Education"
+              required=""
+            />
+            <select
+              id="Work-Preference"
+              name="Work-Preference"
+              data-name="Work Preference"
+              required=""
+              class="contact-form-input bg-light w-select"
+            >
+              <option value="">Work Preference *</option>
+              <option value="Domestic">Domestic</option>
+              <option value="Abroad">Abroad</option>
+              <option value="Both">Both</option>
+            </select>
+            <div id="w-node-cv-upload" class="cv-upload-wrap">
+              <label for="CV" class="field-label" style="margin-bottom: 8px; display: block; font-size: 14px; opacity: 0.8;">Upload CV (Optional)</label>
+              <input
+                class="contact-form-input bg-light w-input"
+                name="CV"
+                data-name="CV"
+                type="file"
+                id="CV"
+                style="padding-top: 10px;"
+              />
+            </div>
+            <textarea
+              class="contact-form-input textarea bg-light w-input"
+              maxlength="5000"
+              name="Message"
+              data-name="Message"
+              placeholder="Message"
+              id="Message"
+            ></textarea>
+          </div>
+          <div class="input-button-wrap" style="opacity: 1 !important;">
+            <!-- Hidden native submit button to trigger HTML5 validation -->
+            <input type="submit" id="ca-popup-hidden-submit" style="display:none;" />
+            
+            <a
+              href="#"
+              onclick="document.getElementById('ca-popup-hidden-submit').click(); return false;"
+              data-wf--button--variant="secondary-bg"
+              data-w-id="8932a183-40ec-c216-e8b4-670b55f18dc8"
+              class="button-link w-inline-block"
+            >
+              <div class="button-hover-overlay"></div>
+              <div class="button-text-wrapper">
+                <div class="button-text-wrap">
+                  <div class="button-text">Submit Message</div>
+                  <div class="button-text-hover">Submit Message</div>
+                </div>
+              </div>
+              <div class="button-arrow-wrapper">
+                <div class="button-arrow-wrap">
+                  <img
+                    src="https://cdn.prod.website-files.com/6944f1597ac277b25076ccab/696f63876d24cb09a16150a7_button-arrow.svg"
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                    alt="button-arrow"
+                    class="button-arrow"
+                  />
+                </div>
+              </div>
+            </a>
+          </div>
+        </form>
+        <div id="ca-popup-success" class="success-message w-form-done" style="display:none;">
+          <div>Thank you! Your submission has been received! We'll be in touch shortly.</div>
+        </div>
+        <div id="ca-popup-error" class="error-message w-form-fail" style="display:none;">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     POPUP STYLES
+     ============================================= -->
+<style>
+  /* ---------- BACKDROP ---------- */
+  .ca-popup-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(10, 10, 20, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: caBackdropIn 0.3s ease forwards;
+  }
+
+  .ca-popup-backdrop.ca-is-open {
+    display: block;
+  }
+
+  @keyframes caBackdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ---------- MODAL ---------- */
+  .ca-popup-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    /* 40px space around all edges */
+    margin: 40px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+    transform: translateY(40px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  }
+
+  .ca-popup-modal.ca-is-open {
+    display: block;
+    animation: caModalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes caModalIn {
+    from { transform: translateY(40px) scale(0.96); opacity: 0; }
+    to   { transform: translateY(0) scale(1);       opacity: 1; }
+  }
+
+  /* ---------- CLOSE BUTTON (top-right inside popup) ---------- */
+  .ca-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.08);
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+
+  .ca-popup-close:hover {
+    background: rgba(0, 0, 0, 0.15);
+    color: #000;
+    transform: rotate(90deg) scale(1.1);
+  }
+
+  /* ---------- INNER LAYOUT (two columns) ---------- */
+  .ca-popup-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    min-height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  /* ---------- LEFT INFO PANEL ---------- */
+  .ca-popup-info-panel {
+    background: var(--accent, #1a56db);
+    color: #fff;
+    padding: 52px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ca-popup-info-panel::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+
+  .ca-popup-info-panel::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+
+  .ca-popup-info-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .ca-popup-info-heading {
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0;
+  }
+
+  .ca-popup-info-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .ca-popup-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: auto;
+  }
+
+  .ca-popup-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .ca-popup-contact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ---------- RIGHT FORM PANEL ---------- */
+  .ca-popup-form-panel {
+    padding: 52px 44px;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  /* Override Webflow opacity:0 animations inside the popup */
+  .ca-popup-modal [data-w-id],
+  .ca-popup-modal .input-button-wrap {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  /* ---------- SCROLLBAR ---------- */
+  .ca-popup-modal::-webkit-scrollbar {
+    width: 6px;
+  }
+  .ca-popup-modal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .ca-popup-modal::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.18);
+    border-radius: 6px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 767px) {
+    .ca-popup-modal {
+      margin: 16px;
+      max-height: calc(100vh - 32px);
+      border-radius: 16px;
+    }
+
+    .ca-popup-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .ca-popup-info-panel {
+      padding: 36px 28px;
+    }
+
+    .ca-popup-form-panel {
+      padding: 36px 28px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .ca-popup-modal {
+      margin: 10px;
+      max-height: calc(100vh - 20px);
+    }
+  }
+</style>
+
+<!-- =============================================
+     POPUP JAVASCRIPT
+     ============================================= -->
+<script>
+  function openCareerAdvisorPopup() {
+    var backdrop = document.getElementById('career-advisor-popup-backdrop');
+    var modal    = document.getElementById('career-advisor-popup');
+    if (!backdrop || !modal) return;
+
+    // Reset form state
+    document.getElementById('ca-popup-success').style.display = 'none';
+    document.getElementById('ca-popup-error').style.display   = 'none';
+    document.getElementById('wf-form-Career-Advisor-Popup').style.display = 'block';
+
+    backdrop.classList.add('ca-is-open');
+    modal.classList.add('ca-is-open');
+    document.body.style.overflow = 'hidden';
+
+    // Re-initialize Webflow Interactions (IX2) and Forms for the dynamic popup content
+    if (window.Webflow && window.Webflow.require) {
+      var ix2 = window.Webflow.require('ix2');
+      if (ix2 && ix2.init) {
+        setTimeout(function() { ix2.init(); }, 100);
+      }
+      var forms = window.Webflow.require('forms');
+      if (forms && forms.init) {
+        setTimeout(function() { forms.init(); }, 100);
+      }
+    }
+
+    // Trap focus on the close button
+    setTimeout(function () {
+      var closeBtn = document.getElementById('ca-popup-close-btn');
+      if (closeBtn) closeBtn.focus();
+    }, 350);
+  }
+
+  function closeCareerAdvisorPopup() {
+    var backdrop = document.getElementById('career-advisor-popup-backdrop');
+    var modal    = document.getElementById('career-advisor-popup');
+    if (!backdrop || !modal) return;
+
+    modal.style.animation    = 'caModalOut 0.25s ease forwards';
+    backdrop.style.animation = 'caBackdropOut 0.25s ease forwards';
+
+    setTimeout(function () {
+      backdrop.classList.remove('ca-is-open');
+      modal.classList.remove('ca-is-open');
+      modal.style.animation    = '';
+      backdrop.style.animation = '';
+      document.body.style.overflow = '';
+    }, 250);
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeCareerAdvisorPopup();
+  });
+
+  // Exit animations
+  var caStyle = document.createElement('style');
+  caStyle.textContent = [
+    '@keyframes caModalOut   { from { transform:translateY(0) scale(1); opacity:1; } to { transform:translateY(30px) scale(0.96); opacity:0; } }',
+    '@keyframes caBackdropOut { from { opacity:1; } to { opacity:0; } }'
+  ].join('');
+  document.head.appendChild(caStyle);
+
+  function handleCareerAdvisorFormSubmit(e) {
+    e.preventDefault();
+    var form    = document.getElementById('wf-form-Career-Advisor-Popup');
+    var success = document.getElementById('ca-popup-success');
+    var error   = document.getElementById('ca-popup-error');
+
+    // Show success (mimicking the contact page behavior)
+    form.style.display    = 'none';
+    success.style.display = 'block';
+    error.style.display   = 'none';
+
+    // Auto-close popup after 3 seconds
+    setTimeout(function () { closeCareerAdvisorPopup(); }, 3000);
+  }
+</script>
