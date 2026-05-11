@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { getWebflowThemeCssForIframe } from '../theme.js'
 
@@ -31,8 +31,6 @@ function fixMarquee(html) {
   `
 
   // Replace any existing marquee section
-  // Note: Webflow often uses <section class="marquee-section"> or <div class="marquee">
-  // We'll try to find the container and replace its inner content or the whole section.
   const marqueeRegex = /<section[^>]*class="[^"]*marquee-section[^"]*"[^>]*>([\s\S]*?)<\/section>/gi
   if (marqueeRegex.test(html)) {
     return html.replace(marqueeRegex, newMarqueeHtml)
@@ -63,10 +61,10 @@ function fixTalentSzaText(html) {
   // Replace "Ads Clicks" with "PLACEMENT SUCCESS"
   out = out.replace(/Ads Clicks/g, 'PLACEMENT SUCCESS')
 
-  // Replace "+273%" with "+85%" (specifically in the counter context if possible, but global is safer here)
+  // Replace "+273%" with "+85%"
   out = out.replace(/\+273%/g, '+85%')
 
-  // Replace the consultant description with the training/placement description
+  // Replace the consultant description
   const oldDesc = /We specialize in creating, developing, and managing a brand’s identity to help businesses stand out in the marketplace and connect with their target audience\./g
   const newDesc = 'We specialize in training, mentoring, and placing individuals in roles that match their skills and career goals—helping them stand out and succeed in a competitive job market.'
   out = out.replace(oldDesc, newDesc)
@@ -75,19 +73,16 @@ function fixTalentSzaText(html) {
 }
 
 function withNavBridge(html, activeHref) {
-  // Normalize activeHref for matching (ensure it matches what's in the navbar)
   const normalizedHref = activeHref === '/' ? '/' : activeHref.replace(/\/$/, '')
 
   const injectedCss = `
     <style>
       ${getWebflowThemeCssForIframe()}
       html, body { overflow-x: clip !important; }
-      /* Remove Webflow "Made in Webflow" badge */
       .w-webflow-badge, .webflow-badge, [data-wf-badge], .w-webflow-privacy-badge {
         display: none !important;
       }
 
-      /* Active Nav Link Highlight - Pill Shaped */
       .nav-link[href="${normalizedHref}"],
       .nav-link[href="${normalizedHref}/"],
       .nav-link.w--current {
@@ -107,11 +102,9 @@ function withNavBridge(html, activeHref) {
     </style>
   `
 
-  // Intercept clicks inside the iframe and tell the parent router to navigate.
-  // We only handle internal links (href starts with `/`).
   const bridgeScript = `
     <script>
-      window.SOCIAL_LINKS = ${JSON.stringify(__SOCIAL_LINKS__)};
+      window.SOCIAL_LINKS = ${JSON.stringify(typeof __SOCIAL_LINKS__ !== 'undefined' ? __SOCIAL_LINKS__ : {})};
       window.addEventListener('click', function(e) {
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;
@@ -125,26 +118,23 @@ function withNavBridge(html, activeHref) {
     </script>
   `
 
-  // Add <base href="/"> to ensure absolute paths resolve correctly in srcDoc
   const baseTag = '<base href="/">'
   
   let out = html
-  // Ensure CSS and base tag are inside <head>
   if (/<\/head>/i.test(out)) {
     out = out.replace(/<\/head>/i, `${baseTag}${injectedCss}</head>`)
   } else {
     out = baseTag + injectedCss + out
   }
 
-  // Place the bridge at the end of body so it runs after Webflow markup is present.
   if (/<\/body>/i.test(out)) return out.replace(/<\/body>/i, `${bridgeScript}</body>`)
   return out + bridgeScript
 }
 
-export default function WebflowPage({ html, pageKey }) {
+export default function WebflowPage({ html, pageKey, onReady }) {
   const navigate = useNavigate()
   const location = useLocation()
-  const containerRef = useRef(null)
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false)
 
   useEffect(() => {
     function onMessage(ev) {
@@ -158,6 +148,11 @@ export default function WebflowPage({ html, pageKey }) {
     return () => window.removeEventListener('message', onMessage)
   }, [navigate])
 
+  useEffect(() => {
+    // Reset loading state when html or pageKey changes
+    setIsIframeLoaded(false)
+  }, [html, pageKey])
+
   const srcDoc = useMemo(() => {
     if (!html) return null
     let fixedHtml = fixMarquee(html)
@@ -166,15 +161,40 @@ export default function WebflowPage({ html, pageKey }) {
     return withNavBridge(fixedHtml, location.pathname)
   }, [html, location.pathname])
 
-  if (!srcDoc) return <div ref={containerRef}>Loading...</div>
+  if (!srcDoc) return null
 
   return (
-    <iframe
-      key={pageKey}
-      title="Webflow Page"
-      style={{ width: '100vw', height: '100vh', border: 0, margin: 0, display: 'block' }}
-      srcDoc={srcDoc}
-    />
+    <div style={{ 
+      width: '100vw', 
+      height: '100vh', 
+      backgroundColor: '#ffffff', 
+      overflow: 'hidden',
+      position: 'relative'
+    }}>
+      <iframe
+        key={pageKey}
+        title="Webflow Page"
+        onLoad={() => {
+          // Small delay to ensure the content is actually painted
+          setTimeout(() => {
+            setIsIframeLoaded(true)
+            if (onReady) onReady()
+          }, 100)
+        }}
+        style={{ 
+          width: '100vw', 
+          height: '100vh', 
+          border: 0, 
+          margin: 0, 
+          display: 'block',
+          opacity: isIframeLoaded ? 1 : 0,
+          transition: 'opacity 0.6s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0
+        }}
+        srcDoc={srcDoc}
+      />
+    </div>
   )
 }
-

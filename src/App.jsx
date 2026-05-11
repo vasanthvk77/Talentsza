@@ -1,242 +1,124 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useEffect, useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import WebflowPage from './webflow/WebflowPage'
 import { getWebflowHtmlUrl, loadWebflowHtml } from './webflow/webflowPages'
+import { LoadingProvider, useLoading } from './utils/LoadingContext'
+import LoadingScreen from './components/LoadingScreen'
 
-function StaticWebflowRoute({ pathName }) {
+function WebflowRoute({ pathName, paramsKind }) {
+  const { slug } = useParams()
+  const location = useLocation()
+  const { startLoading, stopLoading } = useLoading()
   const [html, setHtml] = useState(null)
+  const [error, setError] = useState(false)
+  const isMounted = useRef(true)
 
-  const url = useMemo(() => getWebflowHtmlUrl(pathName), [pathName])
+  // Determine the effective path name or params
+  const effectivePathName = pathName || location.pathname
+  const url = useMemo(() => {
+    if (paramsKind) {
+      return getWebflowHtmlUrl(null, { kind: paramsKind, slug })
+    }
+    return getWebflowHtmlUrl(effectivePathName)
+  }, [effectivePathName, paramsKind, slug])
 
   useEffect(() => {
-    let cancelled = false
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  const handleReady = () => {
+    // Content is ready in the iframe, we can stop the global loading
+    setTimeout(() => {
+      if (isMounted.current) stopLoading()
+    }, 100)
+  }
+
+  useEffect(() => {
     const run = async () => {
+      startLoading()
+      setError(false)
+      
       try {
         if (!url) throw new Error('No url')
         const loaded = await loadWebflowHtml(url)
-        if (!cancelled) setHtml(loaded)
-      } catch {
-        const notFoundUrl = getWebflowHtmlUrl('/404')
-        const loaded404 = await loadWebflowHtml(notFoundUrl)
-        if (!cancelled) setHtml(loaded404)
+        if (isMounted.current) {
+          setHtml(loaded)
+        }
+      } catch (err) {
+        console.error('Failed to load page:', err)
+        try {
+          const notFoundUrl = getWebflowHtmlUrl('/404')
+          const loaded404 = await loadWebflowHtml(notFoundUrl)
+          if (isMounted.current) {
+            setHtml(loaded404)
+            setError(true)
+          }
+        } catch {
+          if (isMounted.current) setHtml('<h1>404 Not Found</h1>')
+        }
+        if (isMounted.current) stopLoading()
       }
     }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [url])
 
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey={pathName} />
+    run()
+  }, [url, startLoading, stopLoading])
+
+  if (!html) return null 
+  
+  return <WebflowPage html={html} pageKey={url || 'error'} onReady={handleReady} />
 }
 
-function NotFound() {
-  const [html, setHtml] = useState(null)
-  useEffect(() => {
-    let cancelled = false
-    const run = async () => {
-      const notFoundUrl = getWebflowHtmlUrl('/404')
-      const loaded = await loadWebflowHtml(notFoundUrl)
-      if (!cancelled) setHtml(loaded)
-    }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [])
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey="not-found" />
-}
+function AppContent() {
+  const { isLoading } = useLoading()
+  
+  return (
+    <>
+      <LoadingScreen isVisible={isLoading} />
+      <Routes>
+        <Route path="/" element={<WebflowRoute pathName="/" />} />
+        <Route path="/about-us" element={<WebflowRoute pathName="/about-us" />} />
+        <Route path="/services" element={<WebflowRoute pathName="/services" />} />
+        <Route path="/projects" element={<WebflowRoute pathName="/projects" />} />
+        <Route path="/blog" element={<WebflowRoute pathName="/blog" />} />
+        
+        {/* Static Posts */}
+        <Route path="/post/the-future-of-jobs-skills-2026" element={<WebflowRoute pathName="/post/the-future-of-jobs-skills-2026" />} />
+        <Route path="/post/top-study-abroad-trends-career-opportunities-2026" element={<WebflowRoute pathName="/post/top-study-abroad-trends-career-opportunities-2026" />} />
+        <Route path="/post/Industry-Ready-skills-2026" element={<WebflowRoute pathName="/post/Industry-Ready-skills-2026" />} />
+        <Route path="/post/choosing-right-career-path-2026" element={<WebflowRoute pathName="/post/choosing-right-career-path-2026" />} />
+        <Route path="/post/practical-training-internships-2026" element={<WebflowRoute pathName="/post/practical-training-internships-2026" />} />
+        <Route path="/post/role-soft-skills-career-2026" element={<WebflowRoute pathName="/post/role-soft-skills-career-2026" />} />
+        
+        <Route path="/contact" element={<WebflowRoute pathName="/contact" />} />
+        <Route path="/career" element={<WebflowRoute pathName="/career" />} />
+        <Route path="/faq-page" element={<WebflowRoute pathName="/faq-page" />} />
+        <Route path="/our-team" element={<WebflowRoute pathName="/our-team" />} />
+        
+        <Route path="/utility-pages/style-guide" element={<WebflowRoute pathName="/utility-pages/style-guide" />} />
+        <Route path="/utility-pages/licenses" element={<WebflowRoute pathName="/utility-pages/licenses" />} />
+        <Route path="/utility-pages/changelog" element={<WebflowRoute pathName="/utility-pages/changelog" />} />
 
-function TeamRoute() {
-  const { slug } = useParams()
-  const [html, setHtml] = useState(null)
+        {/* Dynamic Routes */}
+        <Route path="/team/:slug" element={<WebflowRoute paramsKind="team" />} />
+        <Route path="/service/:slug" element={<WebflowRoute paramsKind="service" />} />
+        <Route path="/project/:slug" element={<WebflowRoute paramsKind="project" />} />
+        <Route path="/post/:slug" element={<WebflowRoute paramsKind="post" />} />
 
-  const url = useMemo(() => getWebflowHtmlUrl(null, { kind: 'team', slug }), [slug])
-
-  useEffect(() => {
-    let cancelled = false
-    const run = async () => {
-      try {
-        const loaded = await loadWebflowHtml(url)
-        if (!cancelled) setHtml(loaded)
-      } catch {
-        const notFoundUrl = getWebflowHtmlUrl('/404')
-        const loaded404 = await loadWebflowHtml(notFoundUrl)
-        if (!cancelled) setHtml(loaded404)
-      }
-    }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [url])
-
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey={`team-${slug}`} />
-}
-
-function ServiceRoute() {
-  const { slug } = useParams()
-  const [html, setHtml] = useState(null)
-  const url = useMemo(() => getWebflowHtmlUrl(null, { kind: 'service', slug }), [slug])
-
-  useEffect(() => {
-    let cancelled = false
-    const run = async () => {
-      try {
-        const loaded = await loadWebflowHtml(url)
-        if (!cancelled) setHtml(loaded)
-      } catch {
-        const notFoundUrl = getWebflowHtmlUrl('/404')
-        const loaded404 = await loadWebflowHtml(notFoundUrl)
-        if (!cancelled) setHtml(loaded404)
-      }
-    }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [url])
-
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey={`service-${slug}`} />
-}
-
-function ProjectRoute() {
-  const { slug } = useParams()
-  const [html, setHtml] = useState(null)
-  const url = useMemo(() => getWebflowHtmlUrl(null, { kind: 'project', slug }), [slug])
-
-  useEffect(() => {
-    let cancelled = false
-    const run = async () => {
-      try {
-        const loaded = await loadWebflowHtml(url)
-        if (!cancelled) setHtml(loaded)
-      } catch {
-        const notFoundUrl = getWebflowHtmlUrl('/404')
-        const loaded404 = await loadWebflowHtml(notFoundUrl)
-        if (!cancelled) setHtml(loaded404)
-      }
-    }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [url])
-
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey={`project-${slug}`} />
-}
-
-function PostRoute() {
-  const { slug } = useParams()
-  const [html, setHtml] = useState(null)
-  const url = useMemo(() => getWebflowHtmlUrl(null, { kind: 'post', slug }), [slug])
-
-  useEffect(() => {
-    let cancelled = false
-    const run = async () => {
-      try {
-        const loaded = await loadWebflowHtml(url)
-        if (!cancelled) setHtml(loaded)
-      } catch {
-        const notFoundUrl = getWebflowHtmlUrl('/404')
-        const loaded404 = await loadWebflowHtml(notFoundUrl)
-        if (!cancelled) setHtml(loaded404)
-      }
-    }
-    run()
-    return () => {
-      cancelled = true
-    }
-  }, [url])
-
-  if (!html) return <div>Loading...</div>
-  return <WebflowPage html={html} pageKey={`post-${slug}`} />
+        <Route path="*" element={<WebflowRoute pathName="/404" />} />
+      </Routes>
+    </>
+  )
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<StaticWebflowRoute pathName="/" />} />
-        <Route
-          path="/about-us"
-          element={<StaticWebflowRoute pathName="/about-us" />}
-        />
-        <Route
-          path="/services"
-          element={<StaticWebflowRoute pathName="/services" />}
-        />
-        <Route
-          path="/projects"
-          element={<StaticWebflowRoute pathName="/projects" />}
-        />
-        <Route path="/blog" element={<StaticWebflowRoute pathName="/blog" />} />
-        <Route
-          path="/post/the-future-of-jobs-skills-2026"
-          element={<StaticWebflowRoute pathName="/post/the-future-of-jobs-skills-2026" />}
-        />
-        <Route
-          path="/post/top-study-abroad-trends-career-opportunities-2026"
-          element={<StaticWebflowRoute pathName="/post/top-study-abroad-trends-career-opportunities-2026" />}
-        />
-        <Route
-          path="/post/Industry-Ready-skills-2026"
-          element={<StaticWebflowRoute pathName="/post/Industry-Ready-skills-2026" />}
-        />
-        <Route
-          path="/post/choosing-right-career-path-2026"
-          element={<StaticWebflowRoute pathName="/post/choosing-right-career-path-2026" />}
-        />
-        <Route
-          path="/post/practical-training-internships-2026"
-          element={<StaticWebflowRoute pathName="/post/practical-training-internships-2026" />}
-        />
-        <Route
-          path="/post/role-soft-skills-career-2026"
-          element={<StaticWebflowRoute pathName="/post/role-soft-skills-career-2026" />}
-        />
-        <Route
-          path="/contact"
-          element={<StaticWebflowRoute pathName="/contact" />}
-        />
-        <Route
-          path="/career"
-          element={<StaticWebflowRoute pathName="/career" />}
-        />
-        <Route
-          path="/faq-page"
-          element={<StaticWebflowRoute pathName="/faq-page" />}
-        />
-        <Route
-          path="/our-team"
-          element={<StaticWebflowRoute pathName="/our-team" />}
-        />
-        <Route
-          path="/utility-pages/style-guide"
-          element={<StaticWebflowRoute pathName="/utility-pages/style-guide" />}
-        />
-        <Route
-          path="/utility-pages/licenses"
-          element={<StaticWebflowRoute pathName="/utility-pages/licenses" />}
-        />
-        <Route
-          path="/utility-pages/changelog"
-          element={<StaticWebflowRoute pathName="/utility-pages/changelog" />}
-        />
-
-        <Route path="/team/:slug" element={<TeamRoute />} />
-        <Route path="/service/:slug" element={<ServiceRoute />} />
-        <Route path="/project/:slug" element={<ProjectRoute />} />
-        <Route path="/post/:slug" element={<PostRoute />} />
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <LoadingProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </LoadingProvider>
   )
 }
