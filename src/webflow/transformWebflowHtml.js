@@ -185,21 +185,23 @@ export function transformWebflowHtml(html) {
       lastScrollTop = st <= 0 ? 0 : st;
     }, false);
 
-    // Replace footer social icons with exactly: LinkedIn | Instagram | YouTube | Facebook
+    // Replace footer social icons with configurable links from Vite
     const footerSocials = document.querySelector('.footer .footer-social-icons');
     if (footerSocials) {
+      // __SOCIAL_LINKS__ is defined in vite.config.js
+      const links = typeof __SOCIAL_LINKS__ !== 'undefined' ? __SOCIAL_LINKS__ : {};
       footerSocials.innerHTML = \`
-        <a href="https://www.linkedin.com/" target="_blank" class="footer-social-link w-inline-block">
+        <a href="\${links.facebookUrl || 'https://www.facebook.com/'}" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
+        </a>
+        <a href="\${links.linkedinUrl || 'https://www.linkedin.com/'}" target="_blank" class="footer-social-link w-inline-block">
           <div class="icon"></div>
         </a>
-        <a href="https://www.instagram.com/" target="_blank" class="footer-social-link w-inline-block">
+        <a href="\${links.instagramUrl || 'https://www.instagram.com/'}" target="_blank" class="footer-social-link w-inline-block">
           <div class="icon"></div>
         </a>
-        <a href="https://www.youtube.com/" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
-        </a>
-        <a href="https://www.facebook.com/" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
+        <a href="\${links.blogUrl || 'https://www.talentsza.com/blog'}" target="_blank" class="footer-social-link w-inline-block">
+          <div class="icon"></div>
         </a>
       \`;
     }

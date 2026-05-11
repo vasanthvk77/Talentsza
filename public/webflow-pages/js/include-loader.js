@@ -10,7 +10,17 @@
             try {
                 const response = await fetch(file);
                 if (response.ok) {
-                    const content = await response.text();
+                    let content = await response.text();
+                    
+                    // Replace placeholders if SOCIAL_LINKS is available
+                    if (window.SOCIAL_LINKS) {
+                        const links = window.SOCIAL_LINKS;
+                        content = content
+                            .replace(/{{VITE_FACEBOOK_URL}}/g, links.facebookUrl || '')
+                            .replace(/{{VITE_LINKEDIN_URL}}/g, links.linkedinUrl || '')
+                            .replace(/{{VITE_INSTAGRAM_URL}}/g, links.instagramUrl || '')
+                            .replace(/{{VITE_BLOG_URL}}/g, links.blogUrl || '');
+                    }
                     
                     // Create a temporary container to parse the HTML
                     const temp = document.createElement('div');
@@ -37,7 +47,21 @@
                     // Re-trigger layout events for Webflow/Animations
                     setTimeout(() => {
                         window.dispatchEvent(new Event('resize'));
-                    }, 100);
+                        
+                        // Robust Webflow re-initialization
+                        if (window.Webflow) {
+                            if (window.Webflow.destroy) window.Webflow.destroy();
+                            if (window.Webflow.ready) window.Webflow.ready();
+                            if (window.Webflow.require) {
+                                const ix2 = window.Webflow.require('ix2');
+                                if (ix2) ix2.init();
+                                
+                                // Specifically re-init navbar if present
+                                const navbar = window.Webflow.require('navbar');
+                                if (navbar) navbar.ready();
+                            }
+                        }
+                    }, 200);
                 } else {
                     console.error('Failed to load component:', file, response.status);
                 }

@@ -43,6 +43,20 @@ function fixMarquee(html) {
   return html.replace(divMarqueeRegex, newMarqueeHtml)
 }
 
+function fixSocialLinks(html) {
+  // __SOCIAL_LINKS__ is defined in vite.config.js
+  const links = typeof __SOCIAL_LINKS__ !== 'undefined' ? __SOCIAL_LINKS__ : {};
+  let out = html;
+  
+  // Replace placeholders with values from Vite config
+  if (links.facebookUrl) out = out.replace(/{{VITE_FACEBOOK_URL}}/g, links.facebookUrl);
+  if (links.linkedinUrl) out = out.replace(/{{VITE_LINKEDIN_URL}}/g, links.linkedinUrl);
+  if (links.instagramUrl) out = out.replace(/{{VITE_INSTAGRAM_URL}}/g, links.instagramUrl);
+  if (links.blogUrl) out = out.replace(/{{VITE_BLOG_URL}}/g, links.blogUrl);
+  
+  return out;
+}
+
 function fixTalentSzaText(html) {
   let out = html
 
@@ -97,6 +111,7 @@ function withNavBridge(html, activeHref) {
   // We only handle internal links (href starts with `/`).
   const bridgeScript = `
     <script>
+      window.SOCIAL_LINKS = ${JSON.stringify(__SOCIAL_LINKS__)};
       window.addEventListener('click', function(e) {
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;
@@ -110,12 +125,15 @@ function withNavBridge(html, activeHref) {
     </script>
   `
 
+  // Add <base href="/"> to ensure absolute paths resolve correctly in srcDoc
+  const baseTag = '<base href="/">'
+  
   let out = html
-  // Ensure CSS is inside <head> so it applies early.
+  // Ensure CSS and base tag are inside <head>
   if (/<\/head>/i.test(out)) {
-    out = out.replace(/<\/head>/i, `${injectedCss}</head>`)
+    out = out.replace(/<\/head>/i, `${baseTag}${injectedCss}</head>`)
   } else {
-    out = injectedCss + out
+    out = baseTag + injectedCss + out
   }
 
   // Place the bridge at the end of body so it runs after Webflow markup is present.
@@ -144,6 +162,7 @@ export default function WebflowPage({ html, pageKey }) {
     if (!html) return null
     let fixedHtml = fixMarquee(html)
     fixedHtml = fixTalentSzaText(fixedHtml)
+    fixedHtml = fixSocialLinks(fixedHtml)
     return withNavBridge(fixedHtml, location.pathname)
   }, [html, location.pathname])
 
