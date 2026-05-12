@@ -38,6 +38,7 @@ function WebflowRoute({ pathName, paramsKind }) {
 
   useEffect(() => {
     const run = async () => {
+      setHtml(null) // Clear previous content immediately
       startLoading()
       setError(false)
       
@@ -72,7 +73,13 @@ function WebflowRoute({ pathName, paramsKind }) {
 }
 
 function AppContent() {
-  const { isLoading } = useLoading()
+  const { isLoading, startLoading } = useLoading()
+  const location = useLocation()
+
+  // Immediately start loading when navigation begins
+  useEffect(() => {
+    startLoading()
+  }, [location.pathname, startLoading])
   
   return (
     <>
