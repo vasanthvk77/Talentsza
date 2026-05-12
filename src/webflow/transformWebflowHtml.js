@@ -192,16 +192,32 @@ export function transformWebflowHtml(html) {
       const links = typeof __SOCIAL_LINKS__ !== 'undefined' ? __SOCIAL_LINKS__ : {};
       footerSocials.innerHTML = \`
         <a href="\${links.facebookUrl || 'https://www.facebook.com/'}" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
+          <div class="icon">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="#1877F2"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+          </div>
         </a>
         <a href="\${links.linkedinUrl || 'https://www.linkedin.com/'}" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
+          <div class="icon">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </div>
         </a>
         <a href="\${links.instagramUrl || 'https://www.instagram.com/'}" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
+          <div class="icon">
+            <svg class="social-icon-svg" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="trans-insta-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#f09433" /><stop offset="25%" style="stop-color:#e6683c" />
+                  <stop offset="50%" style="stop-color:#dc2743" /><stop offset="75%" style="stop-color:#cc2366" />
+                  <stop offset="100%" style="stop-color:#bc1888" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#trans-insta-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.668.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.947.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.669-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4.162 4.162 0 110-8.324A4.162 4.162 0 0112 16zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
         </a>
         <a href="\${links.blogUrl || 'https://www.talentsza.com/blog'}" target="_blank" class="footer-social-link w-inline-block">
-          <div class="icon"></div>
+          <div class="icon">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="#FF5722"><path d="M11.905 15c.677 0 1.258-.24 1.742-.724.484-.484.726-1.065.726-1.742V10.15c0-.677-.242-1.258-.726-1.742a2.38 2.38 0 0 0-1.742-.726c.677 0 1.258-.24 1.742-.724a2.38 2.38 0 0 0 .726-1.742V2.466c0-.677-.242-1.258-.726-1.742A2.38 2.38 0 0 0 11.905 0H4.095c-.677 0-1.258.24-1.742.724a2.38 2.38 0 0 0-.726 1.742V12.53c0 .677.242 1.258.726 1.742a2.38 2.38 0 0 0 1.742.724h7.81h.001Zm-7.81-12.534h7.81v2.466h-7.81V2.466Zm0 5.216h7.81V12.53h-7.81V7.682Z"/></svg>
+          </div>
         </a>
       \`;
     }

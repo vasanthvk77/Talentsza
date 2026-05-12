@@ -183,6 +183,27 @@ export function getThemeGlobalOverridesCss() {
       filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(1918%) hue-rotate(360deg) brightness(98%) contrast(98%) !important;
     }
 
+    /* Social Icon Hover Effects */
+    .header-social-link img,
+    .footer-social-link img {
+      transition: all 0.3s ease-in-out !important;
+      display: block;
+    }
+
+    /* Social Icon Styling */
+    .social-icon-svg {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease-in-out !important;
+      display: block;
+    }
+
+    .header-social-link:hover .social-icon-svg,
+    .footer-social-link:hover .social-icon-svg {
+      transform: scale(1.15);
+      opacity: 0.8;
+    }
+
     /* Professional Fixed Header with Glassmorphism */
     .header {
       position: fixed !important;
