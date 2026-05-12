@@ -79,6 +79,23 @@ export function transformWebflowHtml(html) {
         --secondary-color: #ED6D00 !important;
         --secondary-color-text: #ffffff !important;
       }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Prevent double-text rendering on buttons before Webflow IX2 initializes */
+      .button-text-hover {
+        display: none !important;
+      }
+      .w-mod-ix .button-text-hover {
+        display: block !important;
+      }
+      /* Standardize button text weight to prevent "over-bolding" */
+      .button-text, .button-text-hover {
+        font-weight: 500 !important;
+        -webkit-font-smoothing: antialiased;
+        letter-spacing: 0px !important;
+      }
     </style>
     </head>`
   )
