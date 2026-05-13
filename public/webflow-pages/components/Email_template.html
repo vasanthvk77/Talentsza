@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>New Inquiry</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f6f9; font-family: Arial, Helvetica, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f6f9; padding: 20px 10px;">
+    <tr>
+      <td align="center">
+        <!-- Main Container -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 650px; background-color: #ffffff; border-radius: 12px; overflow: hidden; margin: 0 auto; border-collapse: collapse;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #2563eb, #1e40af); background-color: #2563eb; padding: 35px 20px; text-align: center; color: #ffffff;">
+              <h1 style="margin: 0; font-size: 28px; line-height: 1.3;">New Inquiry Received</h1>
+              <p style="margin: 10px 0 0; font-size: 15px; opacity: 0.9;">A new client has submitted an inquiry through Talentsza</p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 35px 30px;">
+              <!-- Intro Section -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="70" valign="top" style="padding-bottom: 20px;">
+                    <div style="width: 55px; height: 55px; background-color: #eff6ff; border-radius: 50%; text-align: center; line-height: 55px; font-size: 28px;">👤</div>
+                  </td>
+                  <td valign="top" style="padding-bottom: 20px;">
+                    <p style="margin: 0; color: #6b7280; font-size: 14px;">Inquiry received from</p>
+                    <h2 style="margin: 5px 0 10px; color: #111827; font-size: 22px;">{{name}}</h2>
+                    <p style="margin: 0; color: #6b7280; font-size: 14px;">Submitted on {{time}}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="border-top: 1px solid #e5e7eb; margin: 20px 0;"></div>
+
+              <!-- Client Details -->
+              <h3 style="margin: 0 0 20px; color: #1f2937; font-size: 18px;">Client Details</h3>
+              <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#e5e7eb" style="border-collapse: collapse; font-size: 14px;">
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151; width: 35%;">Name</td>
+                  <td style="padding: 12px; color: #111827;">{{name}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151;">Phone</td>
+                  <td style="padding: 12px; color: #111827;">{{phone}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151;">Email</td>
+                  <td style="padding: 12px; color: #2563eb;">{{email}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151;">Location</td>
+                  <td style="padding: 12px; color: #111827;">{{place}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151;">Education</td>
+                  <td style="padding: 12px; color: #111827;">{{education}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; background-color: #f9fafb; font-weight: 600; color: #374151;">Work Preference</td>
+                  <td style="padding: 12px; color: #111827;">{{work_preference}}</td>
+                </tr>
+              </table>
+
+              <!-- Message Section -->
+              <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #2563eb; border-radius: 8px;">
+                <h3 style="margin: 0 0 10px; color: #1f2937; font-size: 17px;">Client Message</h3>
+                <p style="margin: 0; color: #4b5563; line-height: 1.6; font-size: 14px;">{{message}}</p>
+              </div>
+
+              <!-- Attachment Section -->
+              <div style="margin-top: 30px; padding: 20px; background-color: #eff6ff; border: 1px dashed #93c5fd; border-radius: 8px;">
+                <h3 style="margin: 0 0 10px; color: #1e3a8a; font-size: 17px;">📎 Attached CV / Resume</h3>
+                <p style="margin: 0; color: #374151; font-size: 14px;">
+                  <strong>Filename:</strong> {{cv_attachment}}
+                </p>
+                <p style="margin: 10px 0 0; color: #6b7280; font-size: 12px;">
+                  The file is attached to this email. You can download it using your email app's attachment menu.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #111827; padding: 20px; text-align: center; color: #d1d5db; font-size: 13px;">
+              © 2026 Talentsza. All Rights Reserved.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

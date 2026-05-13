@@ -1,7 +1,7 @@
 /**
  * Robust component loader for Talentsza
  * This version manually executes scripts inside the loaded components
- * and handles global form submissions via EmailJS.
+ * and handles global form submissions via a custom PHP mailer.
  */
 (function() {
     // 0. Inject Spinner Styles
@@ -48,18 +48,6 @@
                 // Set global SOCIAL_LINKS so placeholders are replaced
                 if (CONFIG.socialLinks) {
                     window.SOCIAL_LINKS = CONFIG.socialLinks;
-                }
-
-                const emailKeys = CONFIG.emailConfig || {};
-                if (emailKeys.publicKey && !window.emailjs) {
-                    const script = document.createElement('script');
-                    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-                    script.async = true;
-                    script.onload = () => {
-                        window.emailjs.init(emailKeys.publicKey);
-                        console.log("EmailJS Initialized from config.json");
-                    };
-                    document.head.appendChild(script);
                 }
             }
         } catch (err) {
@@ -128,80 +116,34 @@
             formWrapper.appendChild(overlay);
         }
 
-        const emailKeys = CONFIG.emailConfig || {};
-
         try {
-            const formData = new FormData(form);
-            const templateParams = {};
-            
-            // Match your custom template variables EXACTLY
-            templateParams.name = formData.get('Full-Name');
-            templateParams.phone = formData.get('Phone-Number');
-            templateParams.email = formData.get('Email-Address');
-            templateParams.place = formData.get('Place');
-            templateParams.education = formData.get('Education');
-            templateParams.work_preference = formData.get('Work-Preference');
-            templateParams.message = formData.get('Message') || formData.get('Comment');
-            
-            // Add dynamic time and a title
-            templateParams.time = new Date().toLocaleString();
-            templateParams.title = "Inquiry #" + Math.floor(Math.random() * 10000);
-            
-            // 2. Handle CV File Upload via Cloudinary (Free Storage)
-            let cvUrl = "No attachment provided";
-            
-            if (cvFile && cvFile.size > 0) {
-                if (emailKeys.cloudinaryCloudName && emailKeys.cloudinaryPreset) {
-                    try {
-                        const cloudData = new FormData();
-                        cloudData.append('file', cvFile);
-                        cloudData.append('upload_preset', emailKeys.cloudinaryPreset);
-                        
-                        const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${emailKeys.cloudinaryCloudName}/upload`, {
-                            method: 'POST',
-                            body: cloudData
-                        });
-                        
-                        if (cloudRes.ok) {
-                            const cloudJson = await cloudRes.json();
-                            cvUrl = cloudJson.secure_url;
-                            console.log("File uploaded successfully:", cvUrl);
-                        } else {
-                            console.error("Upload Failed:", await cloudRes.text());
-                            cvUrl = "Upload failed";
-                        }
-                    } catch (err) {
-                        console.error("Cloudinary Error:", err);
-                        cvUrl = "Upload error";
-                    }
+            // Send via PHP Serverless API
+            const response = await fetch('/api/send-email.php', {
+                method: 'POST',
+                body: formData // Send as multipart/form-data automatically
+            });
 
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                // Clear all form fields before hiding
+                form.reset();
+
+                // Show Success State
+                form.style.display = 'none';
+                const successMsg = form.parentElement.querySelector('.w-form-done');
+                if (successMsg) successMsg.style.display = 'block';
+                
+                // For popups, auto-close
+                if (window.closeCareerAdvisorPopup) {
+                    setTimeout(() => window.closeCareerAdvisorPopup(), 3000);
                 }
-            }
-            
-            templateParams.cv_attachment = cvUrl;
-
-            // Send via EmailJS
-            await window.emailjs.send(
-                emailKeys.serviceId,
-                emailKeys.templateId,
-                templateParams
-            );
-
-            // Clear all form fields before hiding
-            form.reset();
-
-            // Show Success State
-            form.style.display = 'none';
-            const successMsg = form.parentElement.querySelector('.w-form-done');
-            if (successMsg) successMsg.style.display = 'block';
-            
-            // For popups, auto-close
-            if (window.closeCareerAdvisorPopup) {
-                setTimeout(() => window.closeCareerAdvisorPopup(), 3000);
+            } else {
+                throw new Error(result.message || "Failed to send email");
             }
 
         } catch (error) {
-            console.error("EmailJS Error:", error);
+            console.error("Submission Error:", error);
             const errorMsg = form.parentElement.querySelector('.w-form-fail');
             if (errorMsg) errorMsg.style.display = 'block';
         } finally {
@@ -216,7 +158,8 @@
         }
     }
 
-    document.addEventListener('submit', handleGlobalSubmit);
+    // Use capture phase (true) to ensure our handler runs before Webflow's default scripts
+    document.addEventListener('submit', handleGlobalSubmit, true);
 
     function loadIncludes() {
         const includes = document.querySelectorAll('[data-include]');

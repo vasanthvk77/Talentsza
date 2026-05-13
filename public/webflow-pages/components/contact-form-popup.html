@@ -53,7 +53,6 @@
           method="post"
           enctype="multipart/form-data"
           class="contact-form"
-          onsubmit="handleCareerAdvisorFormSubmit(event)"
         >
           <div class="contact-form-grid">
             <input
@@ -479,19 +478,4 @@
     '@keyframes caBackdropOut { from { opacity:1; } to { opacity:0; } }'
   ].join('');
   document.head.appendChild(caStyle);
-
-  function handleCareerAdvisorFormSubmit(e) {
-    e.preventDefault();
-    var form    = document.getElementById('wf-form-Career-Advisor-Popup');
-    var success = document.getElementById('ca-popup-success');
-    var error   = document.getElementById('ca-popup-error');
-
-    // Show success (mimicking the contact page behavior)
-    form.style.display    = 'none';
-    success.style.display = 'block';
-    error.style.display   = 'none';
-
-    // Auto-close popup after 3 seconds
-    setTimeout(function () { closeCareerAdvisorPopup(); }, 3000);
-  }
 </script>

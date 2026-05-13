@@ -5,11 +5,12 @@
     "instagramUrl": "https://www.instagram.com/talentsza/",
     "blogUrl": "https://talentsza.blogspot.com/"
   },
-  "emailConfig": {
-    "publicKey": "6BDMukBJKJHz-Iwvl",
-    "serviceId": "service_acmzj7s",
-    "templateId": "template_b4xg0tu",
-    "cloudinaryCloudName": "dqayzd6ta",
-    "cloudinaryPreset": "Talentsza"
+  "smtpConfig": {
+    "Host": "smtp.gmail.com",
+    "Port": 587,
+    "Username": "naravind105@gmail.com",
+    "Password": "mtmu xgjn ckyi acwp",
+    "encryption": "tls",
+    "receiverEmail": "naravind105@hotmail.com"
   }
 }

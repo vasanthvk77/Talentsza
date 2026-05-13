@@ -13,5 +13,14 @@ export default defineConfig({
   plugins: [react()],
   define: {
     __SOCIAL_LINKS__: JSON.stringify(SOCIAL_LINKS)
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
