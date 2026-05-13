@@ -4,6 +4,38 @@
  * and handles global form submissions via EmailJS.
  */
 (function() {
+    // 0. Inject Spinner Styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .ts-form-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            border-radius: 8px;
+            backdrop-filter: blur(2px);
+        }
+        .ts-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #ED6D00;
+            border-radius: 50%;
+            animation: ts-spin 0.8s linear infinite;
+        }
+        @keyframes ts-spin {
+            to { transform: rotate(360deg); }
+        }
+        .ts-form-wrap {
+            position: relative;
+        }
+    `;
+    document.head.appendChild(style);
+
     // 1. Initialize Config (Social + Email)
     let CONFIG = { socialLinks: {}, emailConfig: {} };
     
@@ -44,12 +76,56 @@
         
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        const formData = new FormData(form);
+        const cvFile = formData.get('CV');
+        const fullName = formData.get('Full-Name');
+        const place = formData.get('Place');
+        const education = formData.get('Education');
+
+        // Helper: Validate if text is meaningful (min 3 chars, contains at least one letter)
+        const isInvalidText = (text) => {
+            if (!text) return true; // Empty is invalid
+            if (text.trim().length < 3) return true; // Too short
+            if (!/[a-zA-Z]/.test(text)) return true; // No letters at all (just dots/symbols)
+            return false;
+        };
+
+        // 1. IMMEDIATE VALIDATION: Check for 5MB limit before doing anything else
+        if (cvFile && cvFile.size > 5 * 1024 * 1024) {
+            alert("The file is too large! Please upload a CV smaller than 5MB.");
+            return false;
+        }
+
+        // 2. TEXT VALIDATION: Ensure Name, Place, and Education are real
+        if (isInvalidText(fullName)) {
+            alert("Please enter a valid Full Name (min 3 characters).");
+            return false;
+        }
+        if (isInvalidText(place)) {
+            alert("Please enter a valid Place/Location (min 3 characters).");
+            return false;
+        }
+        if (isInvalidText(education)) {
+            alert("Please enter a valid Education detail (min 3 characters).");
+            return false;
+        }
 
         const submitBtn = form.querySelector('[type="submit"]');
-        const originalBtnValue = submitBtn ? submitBtn.value : "Submit";
         if (submitBtn) {
-            submitBtn.value = "Sending...";
             submitBtn.disabled = true;
+        }
+
+        // Show non-invasive overlay spinner over the form
+        const formWrapper = form.closest('.w-form') || form.parentElement;
+        if (formWrapper) {
+            formWrapper.style.position = 'relative';
+            const overlay = document.createElement('div');
+            overlay.className = 'ts-form-overlay';
+            overlay.id = 'ts-loading-overlay';
+            overlay.innerHTML = '<div class="ts-spinner"></div>';
+            formWrapper.appendChild(overlay);
         }
 
         const emailKeys = CONFIG.emailConfig || {};
@@ -71,21 +147,10 @@
             templateParams.time = new Date().toLocaleString();
             templateParams.title = "Inquiry #" + Math.floor(Math.random() * 10000);
             
-            // 1. Handle CV File Upload via Cloudinary (Free Storage)
-            const cvFile = formData.get('CV');
+            // 2. Handle CV File Upload via Cloudinary (Free Storage)
             let cvUrl = "No attachment provided";
             
             if (cvFile && cvFile.size > 0) {
-                // UI Enforcement: Check for 5MB limit
-                if (cvFile.size > 5 * 1024 * 1024) {
-                    alert("The file is too large! Please upload a CV smaller than 5MB.");
-                    if (submitBtn) {
-                        submitBtn.value = originalBtnValue;
-                        submitBtn.disabled = false;
-                    }
-                    return; // Stop the whole process
-                }
-
                 if (emailKeys.cloudinaryCloudName && emailKeys.cloudinaryPreset) {
                     try {
                         const cloudData = new FormData();
@@ -100,15 +165,16 @@
                         if (cloudRes.ok) {
                             const cloudJson = await cloudRes.json();
                             cvUrl = cloudJson.secure_url;
-                            console.log("File uploaded to Cloudinary:", cvUrl);
+                            console.log("File uploaded successfully:", cvUrl);
                         } else {
-                            console.error("Cloudinary Upload Failed:", await cloudRes.text());
-                            cvUrl = "Upload failed (file may be too large)";
+                            console.error("Upload Failed:", await cloudRes.text());
+                            cvUrl = "Upload failed";
                         }
                     } catch (err) {
                         console.error("Cloudinary Error:", err);
                         cvUrl = "Upload error";
                     }
+
                 }
             }
             
@@ -120,6 +186,9 @@
                 emailKeys.templateId,
                 templateParams
             );
+
+            // Clear all form fields before hiding
+            form.reset();
 
             // Show Success State
             form.style.display = 'none';
@@ -136,8 +205,12 @@
             const errorMsg = form.parentElement.querySelector('.w-form-fail');
             if (errorMsg) errorMsg.style.display = 'block';
         } finally {
+            // Remove overlay spinner
+            const overlay = document.getElementById('ts-loading-overlay');
+            if (overlay) overlay.remove();
+            // Re-enable submit button
+            const submitBtn = form.querySelector('[type="submit"]');
             if (submitBtn) {
-                submitBtn.value = originalBtnValue;
                 submitBtn.disabled = false;
             }
         }
