@@ -4,7 +4,7 @@
  * and handles global form submissions via a custom PHP mailer.
  */
 (function() {
-    // 0. Inject Spinner Styles
+    // 0. Inject Spinner & Error Styles
     const style = document.createElement('style');
     style.textContent = `
         .ts-form-overlay {
@@ -20,35 +20,61 @@
             backdrop-filter: blur(2px);
         }
         .ts-spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 4px solid #e5e7eb;
             border-top-color: #ED6D00;
             border-radius: 50%;
             animation: ts-spin 0.8s linear infinite;
         }
-        @keyframes ts-spin {
-            to { transform: rotate(360deg); }
+        @keyframes ts-spin { to { transform: rotate(360deg); } }
+        .ts-form-wrap { position: relative; }
+        .ts-error-msg {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+            animation: ts-fade-in 0.2s ease;
         }
-        .ts-form-wrap {
-            position: relative;
-        }
+        @keyframes ts-fade-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .ts-input-error { border-color: #ef4444 !important; }
     `;
     document.head.appendChild(style);
 
+    // Helper: Show Error below field
+    function showFieldError(input, message) {
+        clearFieldError(input);
+        input.classList.add('ts-input-error');
+        const err = document.createElement('span');
+        err.className = 'ts-error-msg';
+        err.innerText = message;
+        input.after(err);
+        
+        // Clear on input
+        input.addEventListener('input', () => clearFieldError(input), { once: true });
+    }
+
+    function clearFieldError(input) {
+        input.classList.remove('ts-input-error');
+        const existing = input.nextElementSibling;
+        if (existing && existing.classList.contains('ts-error-msg')) {
+            existing.remove();
+        }
+    }
+
+    function clearAllErrors(form) {
+        form.querySelectorAll('.ts-error-msg').forEach(el => el.remove());
+        form.querySelectorAll('.ts-input-error').forEach(el => el.classList.remove('ts-input-error'));
+    }
+
     // 1. Initialize Config (Social + Email)
-    let CONFIG = { socialLinks: {}, emailConfig: {} };
+    let CONFIG = { socialLinks: {} };
     
     async function initConfig() {
         try {
             const response = await fetch('/webflow-pages/config.json');
             if (response.ok) {
                 CONFIG = await response.json();
-                
-                // Set global SOCIAL_LINKS so placeholders are replaced
-                if (CONFIG.socialLinks) {
-                    window.SOCIAL_LINKS = CONFIG.socialLinks;
-                }
+                if (CONFIG.socialLinks) window.SOCIAL_LINKS = CONFIG.socialLinks;
             }
         } catch (err) {
             console.error("Failed to load config.json:", err);
@@ -66,39 +92,47 @@
         e.stopPropagation();
         e.stopImmediatePropagation();
 
-        const formData = new FormData(form);
-        const cvFile = formData.get('CV');
-        const fullName = formData.get('Full-Name');
-        const place = formData.get('Place');
-        const education = formData.get('Education');
+        clearAllErrors(form);
 
-        // Helper: Validate if text is meaningful (min 3 chars, contains at least one letter)
+        const formData = new FormData(form);
+        // Try to find CV regardless of case
+        const cvFile = formData.get('CV') || formData.get('cv');
+        
+        const fullNameInput = form.querySelector('[name="Full-Name"]');
+        const placeInput = form.querySelector('[name="Place"]');
+        const educationInput = form.querySelector('[name="Education"]');
+        // Find input regardless of case
+        const cvInput = form.querySelector('[name="CV"]') || form.querySelector('[name="cv"]');
+
         const isInvalidText = (text) => {
-            if (!text) return true; // Empty is invalid
-            if (text.trim().length < 3) return true; // Too short
-            if (!/[a-zA-Z]/.test(text)) return true; // No letters at all (just dots/symbols)
+            if (!text) return true;
+            if (text.trim().length < 3) return true;
+            if (!/[a-zA-Z]/.test(text)) return true;
             return false;
         };
 
-        // 1. IMMEDIATE VALIDATION: Check for 5MB limit before doing anything else
-        if (cvFile && cvFile.size > 5 * 1024 * 1024) {
-            alert("The file is too large! Please upload a CV smaller than 5MB.");
-            return false;
+        // 1. Validation Logic
+        let hasError = false;
+        
+        // Check if file is actually selected (has a name) and is too large
+        if (cvFile && cvFile.name && cvFile.size > 5 * 1024 * 1024) {
+            showFieldError(cvInput, "File too large (Max 5MB)");
+            hasError = true;
+        }
+        if (isInvalidText(formData.get('Full-Name'))) {
+            showFieldError(fullNameInput, "Enter a valid full name");
+            hasError = true;
+        }
+        if (isInvalidText(formData.get('Place'))) {
+            showFieldError(placeInput, "Enter a valid location");
+            hasError = true;
+        }
+        if (isInvalidText(formData.get('Education'))) {
+            showFieldError(educationInput, "Enter your education details");
+            hasError = true;
         }
 
-        // 2. TEXT VALIDATION: Ensure Name, Place, and Education are real
-        if (isInvalidText(fullName)) {
-            alert("Please enter a valid Full Name (min 3 characters).");
-            return false;
-        }
-        if (isInvalidText(place)) {
-            alert("Please enter a valid Place/Location (min 3 characters).");
-            return false;
-        }
-        if (isInvalidText(education)) {
-            alert("Please enter a valid Education detail (min 3 characters).");
-            return false;
-        }
+        if (hasError) return false;
 
         const submitBtn = form.querySelector('[type="submit"]');
         if (submitBtn) {
@@ -117,6 +151,12 @@
         }
 
         try {
+            // Clear any existing messages before starting
+            const successMsg = form.parentElement.querySelector('.w-form-done');
+            const errorMsg = form.parentElement.querySelector('.w-form-fail');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+
             // Send via PHP Serverless API
             const response = await fetch('/api/send-email.php', {
                 method: 'POST',
@@ -126,13 +166,20 @@
             const result = await response.json();
 
             if (result.status === 'success') {
-                // Clear all form fields before hiding
                 form.reset();
-
-                // Show Success State
+                
+                // Hide the form fields
                 form.style.display = 'none';
-                const successMsg = form.parentElement.querySelector('.w-form-done');
-                if (successMsg) successMsg.style.display = 'block';
+                
+                // Show Success Message
+                if (successMsg) {
+                    successMsg.style.display = 'block';
+                    // After 3 seconds, hide message and bring the form back
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                        form.style.display = 'block';
+                    }, 3000);
+                }
                 
                 // For popups, auto-close
                 if (window.closeCareerAdvisorPopup) {
@@ -145,7 +192,13 @@
         } catch (error) {
             console.error("Submission Error:", error);
             const errorMsg = form.parentElement.querySelector('.w-form-fail');
-            if (errorMsg) errorMsg.style.display = 'block';
+            if (errorMsg) {
+                errorMsg.style.display = 'block';
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
+            }
         } finally {
             // Remove overlay spinner
             const overlay = document.getElementById('ts-loading-overlay');
