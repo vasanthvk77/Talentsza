@@ -141,6 +141,30 @@
           align-self: start !important;
         }
       }
+
+      /* Show team list vertically on mobile instead of horizontal slider */
+      @media (max-width: 767px) {
+        .slider-responsive {
+          display: none !important;
+        }
+        .team-one-grid {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 30px !important;
+        }
+        .team-one-center-column {
+          order: -1 !important;
+          margin-bottom: 20px !important;
+        }
+        .team-one-column {
+          display: block !important;
+        }
+        .team-one-list {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 30px !important;
+        }
+      }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -430,7 +454,7 @@
                             class="team-one-category-wrap"
                           >
                             <div class="category">(</div>
-                            <div class="category">Founder</div>
+                            <div class="category">Founder & CEO</div>
                             <div class="category">)</div>
                           </div>
                           <div
@@ -503,7 +527,7 @@
                             class="team-one-category-wrap"
                           >
                             <div class="category">(</div>
-                            <div class="category">CEO</div>
+                            <div class="category">COO</div>
                             <div class="category">)</div>
                           </div>
                           <div
@@ -834,7 +858,7 @@
                             class="team-one-category-wrap"
                           >
                             <div class="category">(</div>
-                            <div class="category">COO</div>
+                            <div class="category">CCO</div>
                             <div class="category">)</div>
                           </div>
                           <div
@@ -919,7 +943,7 @@
                             <div class="team-one-link-wrap">
                               <div class="team-one-category-wrap">
                                 <div class="category">(</div>
-                                <div class="category">Founder</div>
+                                <div class="category">Founder & CEO</div>
                                 <div class="category">)</div>
                               </div>
                               <div>
@@ -985,7 +1009,7 @@
                             <div class="team-one-link-wrap">
                               <div class="team-one-category-wrap">
                                 <div class="category">(</div>
-                                <div class="category">CEO</div>
+                                <div class="category">COO</div>
                                 <div class="category">)</div>
                               </div>
                               <div>
@@ -1249,7 +1273,7 @@
                             <div class="team-one-link-wrap">
                               <div class="team-one-category-wrap">
                                 <div class="category">(</div>
-                                <div class="category">COO</div>
+                                <div class="category">CCO</div>
                                 <div class="category">)</div>
                               </div>
                               <div>
