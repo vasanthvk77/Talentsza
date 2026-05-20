@@ -6,11 +6,11 @@
     "blogUrl": "https://talentsza.blogspot.com/"
   },
   "smtpConfig": {
-    "Host": "smtp.gmail.com",
+    "Host": "smtp.hostinger.com",
     "Port": 587,
-    "Username": "naravind105@gmail.com",
-    "Password": "mtmu xgjn ckyi acwp",
+    "Username": "aravind@prodesx.com",
+    "Password": "Prodesx@12345",
     "encryption": "tls",
-    "receiverEmail": "naravind105@hotmail.com"
+    "receiverEmail": "info@talentsza.com"
   }
 }
