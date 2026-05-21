@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation, useParams } from 'react-router-dom'
+import { HashRouter, Routes, Route, useLocation, useParams } from 'react-router-dom'
 import { useEffect, useMemo, useState, useRef } from 'react'
 import WebflowPage from './webflow/WebflowPage'
 import { getWebflowHtmlUrl, loadWebflowHtml } from './webflow/webflowPages'
@@ -41,7 +41,7 @@ function WebflowRoute({ pathName, paramsKind }) {
       setHtml(null) // Clear previous content immediately
       startLoading()
       setError(false)
-      
+
       try {
         if (!url) throw new Error('No url')
         const loaded = await loadWebflowHtml(url)
@@ -67,8 +67,8 @@ function WebflowRoute({ pathName, paramsKind }) {
     run()
   }, [url, startLoading, stopLoading])
 
-  if (!html) return null 
-  
+  if (!html) return null
+
   return <WebflowPage html={html} pageKey={url || 'error'} onReady={handleReady} />
 }
 
@@ -80,7 +80,7 @@ function AppContent() {
   useEffect(() => {
     startLoading()
   }, [location.pathname, startLoading])
-  
+
   return (
     <>
       <LoadingScreen isVisible={isLoading} />
@@ -90,7 +90,7 @@ function AppContent() {
         <Route path="/services" element={<WebflowRoute pathName="/services" />} />
         <Route path="/projects" element={<WebflowRoute pathName="/projects" />} />
         <Route path="/blog" element={<WebflowRoute pathName="/blog" />} />
-        
+
         {/* Static Posts */}
         <Route path="/post/the-future-of-jobs-skills-2026" element={<WebflowRoute pathName="/post/the-future-of-jobs-skills-2026" />} />
         <Route path="/post/top-study-abroad-trends-career-opportunities-2026" element={<WebflowRoute pathName="/post/top-study-abroad-trends-career-opportunities-2026" />} />
@@ -98,12 +98,12 @@ function AppContent() {
         <Route path="/post/choosing-right-career-path-2026" element={<WebflowRoute pathName="/post/choosing-right-career-path-2026" />} />
         <Route path="/post/practical-training-internships-2026" element={<WebflowRoute pathName="/post/practical-training-internships-2026" />} />
         <Route path="/post/role-soft-skills-career-2026" element={<WebflowRoute pathName="/post/role-soft-skills-career-2026" />} />
-        
+
         <Route path="/contact" element={<WebflowRoute pathName="/contact" />} />
         <Route path="/career" element={<WebflowRoute pathName="/career" />} />
         <Route path="/faq-page" element={<WebflowRoute pathName="/faq-page" />} />
         <Route path="/our-team" element={<WebflowRoute pathName="/our-team" />} />
-        
+
         <Route path="/utility-pages/style-guide" element={<WebflowRoute pathName="/utility-pages/style-guide" />} />
         <Route path="/utility-pages/licenses" element={<WebflowRoute pathName="/utility-pages/licenses" />} />
         <Route path="/utility-pages/changelog" element={<WebflowRoute pathName="/utility-pages/changelog" />} />
@@ -123,9 +123,9 @@ function AppContent() {
 export default function App() {
   return (
     <LoadingProvider>
-      <BrowserRouter>
+      <HashRouter>
         <AppContent />
-      </BrowserRouter>
+      </HashRouter>
     </LoadingProvider>
   )
 }
