@@ -11,7 +11,7 @@ const SOCIAL_LINKS = {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: '/Talentsza/',
   define: {
     __SOCIAL_LINKS__: JSON.stringify(SOCIAL_LINKS)
   },
