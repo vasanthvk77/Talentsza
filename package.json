@@ -1,16 +1,17 @@
 {
-  "homepage": "https://vasanthvk77.github.io/Talentsza",
   "name": "talentsza-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node node_modules/vite/bin/vite.js",
+    "backend": "node server.js",
+    "dev-admin": "node node_modules/concurrently/dist/bin/concurrently.js --kill-others \"npm run dev\" \"npm run backend\"",
     "build": "vite build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
