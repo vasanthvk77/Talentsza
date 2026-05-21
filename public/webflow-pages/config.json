@@ -1,0 +1,16 @@
+{
+  "socialLinks": {
+    "linkedinUrl": "https://www.linkedin.com/company/108380434/admin/dashboard/",
+    "facebookUrl": "https://www.facebook.com/Talentsza",
+    "instagramUrl": "https://www.instagram.com/talentsza/",
+    "blogUrl": "https://talentsza.blogspot.com/"
+  },
+  "smtpConfig": {
+    "Host": "smtp.hostinger.com",
+    "Port": 587,
+    "Username": "aravind@prodesx.com",
+    "Password": "Prodesx@12345",
+    "encryption": "tls",
+    "receiverEmail": "info@talentsza.com"
+  }
+}

@@ -1,0 +1,108 @@
+<section class="marquee-section">
+  <div class="marquee-header-container">
+    <div class="subtitle-head-wrap">
+      <div class="subtitle-left-icon"></div>
+      <div class="subtitle-head">Placement done with</div>
+    </div>
+  </div>
+  <div class="marquee">
+    <div id="marquee-list-1" class="marquee-wrap">
+      <!-- Logos will be injected here -->
+    </div>
+    <div id="marquee-list-2" class="marquee-wrap">
+      <!-- Duplicate logos -->
+    </div>
+  </div>
+  
+  <style>
+    .marquee-header-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      margin-top: 0px;
+    }
+    .client-logo {
+      margin: 0 50px !important;
+      opacity: 1;
+      transition: all 0.3s ease;
+      display: block;
+      /* Default sizes if not specified in script */
+      height: 70px;
+      width: auto;
+    }
+    .client-logo:hover {
+      transform: scale(1.2 ); /* Added a subtle scale effect instead of color change */
+    }
+    /* Force animation to keep running on hover */
+    .marquee:hover .marquee-wrap {
+      animation-play-state: running !important;
+    }
+    .marquee-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 90px;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    .marquee-section {
+      padding-top: 0 !important;
+      padding-bottom: 5px !important;
+      margin-top: -40px !important; /* Aggressively pulls it up */
+    }
+  </style>
+
+  <script>
+    (function() {
+      const wraps = document.querySelectorAll('.marquee-wrap');
+      if (wraps.length < 2) return;
+
+      const folderPath = '/webflow-pages/assets/Clients/';
+      
+      const clients = [
+        { name: "PRODESX", logo: "PRODESX.png", height: "95px", width: "auto" },
+        { name: "LANCERS", logo: "LANCERS.png", height: "90px", width: "auto" },
+        { name: "HP", logo: "HP.png", height: "80px", width: "auto" },
+        { name: "DELL", logo: "DELL.png", height: "80px", width: "auto" },
+        { name: "TCS", logo: "TCS.png", height: "60px", width: "auto" },
+        { name: "ACCENTURE", logo: "ACCENTURE.png", height: "90px", width: "auto" },
+        { name: "FLIPKART", logo: "FLIPKART.png", height: "90px", width: "auto" },
+        { name: "HCL", logo: "HCL.jpg", height: "90px", width: "auto" },
+        { name: "GOOGLE", logo: "GOOGLE.png", height: "80px", width: "auto" },
+        { name: "AMAZON", logo: "AMAZON.png", height: "50px", width: "auto" }
+      ];
+
+      const createSet = () => {
+        const fragment = document.createDocumentFragment();
+        clients.forEach(client => {
+          if (!client.logo) return;
+          const img = document.createElement('img');
+          img.src = folderPath + client.logo;
+          img.className = 'client-logo';
+          img.alt = client.name;
+          // Apply custom sizes
+          if (client.height) img.style.height = client.height;
+          if (client.width) img.style.width = client.width;
+          
+          img.onerror = () => img.remove();
+          fragment.appendChild(img);
+        });
+        return fragment;
+      };
+
+      // Populate both wraps for the infinite effect
+      wraps[0].innerHTML = '';
+      wraps[1].innerHTML = '';
+      wraps[0].appendChild(createSet());
+      wraps[1].appendChild(createSet());
+      
+      // Final layout trigger for Webflow
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+        if (window.Webflow && window.Webflow.require) {
+          const ix2 = window.Webflow.require('ix2');
+          if (ix2) ix2.init();
+        }
+      }, 300);
+    })();
+  </script>
+</section>
