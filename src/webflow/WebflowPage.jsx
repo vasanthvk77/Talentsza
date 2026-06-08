@@ -105,6 +105,14 @@ function withNavBridge(html, activeHref) {
   const bridgeScript = `
     <script>
       window.SOCIAL_LINKS = ${JSON.stringify(typeof __SOCIAL_LINKS__ !== 'undefined' ? __SOCIAL_LINKS__ : {})};
+      
+      function notifyInteraction() {
+        parent.postMessage({ type: 'talentsza-interaction' }, '*');
+      }
+      window.addEventListener('click', notifyInteraction, { capture: true, passive: true });
+      window.addEventListener('touchstart', notifyInteraction, { capture: true, passive: true });
+      window.addEventListener('keydown', notifyInteraction, { capture: true, passive: true });
+
       window.addEventListener('click', function(e) {
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;

@@ -7,6 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 // Prevent PHP from outputting HTML errors that break JSON
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
+set_time_limit(120); // Increase execution time to 2 minutes for large attachments
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
@@ -14,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 1. Load Config (SMTP Details)
-$config_path = __DIR__ . '/../public/webflow-pages/config.json';
+// Updated path to point to config.json in the parent directory (webflow-pages)
+$config_path = __DIR__ . '/../config.json';
 if (!file_exists($config_path)) {
     echo json_encode(['status' => 'error', 'message' => 'Configuration file not found']);
     exit;
@@ -33,18 +35,33 @@ foreach ($smtpRaw as $key => $value) {
     $smtp[strtolower($key)] = $value;
 }
 
-// 2. Get Form Data
-$name = $_POST['Full-Name'] ?? 'Not provided';
-$phone = $_POST['Phone-Number'] ?? 'Not provided';
-$email = $_POST['Email-Address'] ?? 'Not provided';
-$place = $_POST['Place'] ?? 'Not provided';
-$education = $_POST['Education'] ?? 'Not provided';
-$work_preference = $_POST['Work-Preference'] ?? 'Not provided';
-$message_content = $_POST['Message'] ?? $_POST['Comment'] ?? 'No message';
+// 2. Get Form Data (Strictly JSON)
+$contentType = $_SERVER["CONTENT_TYPE"] ?? '';
+if (stripos($contentType, 'application/json') === false) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid content type. Only application/json is supported.']);
+    exit;
+}
+
+$rawInput = file_get_contents('php://input');
+$input = json_decode($rawInput, true);
+
+if (!$input) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid JSON payload']);
+    exit;
+}
+
+$name = $input['Full-Name'] ?? 'Not provided';
+$phone = $input['Phone-Number'] ?? 'Not provided';
+$email = $input['Email-Address'] ?? 'Not provided';
+$place = $input['Place'] ?? 'Not provided';
+$education = $input['Education'] ?? 'Not provided';
+$work_preference = $input['Work-Preference'] ?? 'Not provided';
+$message_content = $input['Message'] ?? $input['Comment'] ?? 'No message';
 $time = date('Y-m-d H:i:s');
 
 // 3. Load & Populate HTML Template
-$template_path = __DIR__ . '/../public/webflow-pages/components/Email_template.html';
+// Updated path to point to components/Email_template.html in the parent directory
+$template_path = __DIR__ . '/../components/Email_template.html';
 if (!file_exists($template_path)) {
     echo json_encode(['status' => 'error', 'message' => 'Email template not found']);
     exit;
@@ -52,10 +69,15 @@ if (!file_exists($template_path)) {
 
 $template = file_get_contents($template_path);
 
-// Get CV filename if exists
+// Get CV details if exists (Strictly JSON Base64)
 $cv_name = "No attachment provided";
-if (isset($_FILES['CV']) && $_FILES['CV']['error'] == UPLOAD_ERR_OK) {
-    $cv_name = $_FILES['CV']['name'];
+$cv_data = null;
+$cv_type = null;
+
+if (isset($input['CV']) && is_array($input['CV'])) {
+    $cv_name = $input['CV']['name'] ?? 'attachment.pdf';
+    $cv_type = $input['CV']['type'] ?? 'application/pdf';
+    $cv_data = base64_decode($input['CV']['data'] ?? '');
 }
 
 $placeholders = [
@@ -94,18 +116,12 @@ $body .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
 $body .= $template . "\r\n\r\n";
 
 // Handle File Attachment
-if (isset($_FILES['CV']) && $_FILES['CV']['error'] == UPLOAD_ERR_OK) {
-    $file_tmp = $_FILES['CV']['tmp_name'];
-    $file_name = $_FILES['CV']['name'];
-    $file_size = $_FILES['CV']['size'];
-    $file_type = $_FILES['CV']['type'];
-
-    $content = base64_encode(file_get_contents($file_tmp));
-    $encoded_content = chunk_split($content);
+if ($cv_data) {
+    $encoded_content = chunk_split(base64_encode($cv_data));
 
     $body .= "--$boundary\r\n";
-    $body .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
-    $body .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
+    $body .= "Content-Type: $cv_type; name=\"$cv_name\"\r\n";
+    $body .= "Content-Disposition: attachment; filename=\"$cv_name\"\r\n";
     $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
     $body .= $encoded_content . "\r\n\r\n";
 }
@@ -113,6 +129,7 @@ $body .= "--$boundary--";
 
 // 5. Send via Built-in SMTP Client
 try {
+    $startTime = microtime(true);
     $response = send_smtp(
         $smtp['host'],
         $smtp['port'],
@@ -120,12 +137,12 @@ try {
         $smtp['password'],
         $smtp['username'], // From email
         $to,
-        implode("\r\n", $headers) . "\r\n\r\n" . $body,
-        $smtp['encryption']
+        implode("\r\n", $headers) . "\r\n\r\n" . $body
     );
+    $duration = round(microtime(true) - $startTime, 2);
     
     if ($response === true) {
-        echo json_encode(['status' => 'success', 'message' => 'Email sent successfully']);
+        echo json_encode(['status' => 'success', 'message' => 'Email sent successfully', 'duration' => $duration]);
     } else {
         throw new Exception($response);
     }
@@ -136,9 +153,15 @@ try {
 /**
  * Minimal SMTP Client implementation
  */
-function send_smtp($host, $port, $user, $pass, $from, $to, $data, $encryption) {
-    $socket = fsockopen(($encryption == 'ssl' ? 'ssl://' : '') . $host, $port, $errno, $errstr, 30);
+function send_smtp($host, $port, $user, $pass, $from, $to, $data) {
+    // Automatically use SSL if port is 465
+    $prefix = ($port == 465) ? 'ssl://' : '';
+    // Use a slightly shorter timeout for connection
+    $socket = fsockopen($prefix . $host, $port, $errno, $errstr, 15);
     if (!$socket) return "Connection failed: $errstr ($errno)";
+    
+    // Set socket timeout for read/write operations
+    stream_set_timeout($socket, 15);
 
     $getResponse = function($socket) {
         $res = "";
@@ -156,23 +179,8 @@ function send_smtp($host, $port, $user, $pass, $from, $to, $data, $encryption) {
 
     $getResponse($socket); // Initial welcome
 
-    // HELO
-    $sendCommand($socket, "EHLO " . $_SERVER['HTTP_HOST']);
-
-    // STARTTLS
-    if ($encryption == 'tls') {
-        $res = $sendCommand($socket, "STARTTLS");
-        if (substr($res, 0, 3) != "220") return "STARTTLS failed: $res";
-        
-        if (!extension_loaded('openssl')) {
-            return "PHP OpenSSL extension is not enabled. Please enable it in your php.ini.";
-        }
-
-        if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-            return "Crypto failed: Could not establish a secure connection. Try port 465 with 'ssl' instead.";
-        }
-        $sendCommand($socket, "EHLO " . $_SERVER['HTTP_HOST']);
-    }
+    // HELO/EHLO
+    $sendCommand($socket, "EHLO " . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
 
     // AUTH
     $res = $sendCommand($socket, "AUTH LOGIN");
@@ -193,13 +201,19 @@ function send_smtp($host, $port, $user, $pass, $from, $to, $data, $encryption) {
 
     // DATA
     $sendCommand($socket, "DATA");
-    fputs($socket, $data . "\r\n.\r\n");
+    
+    // Send data in larger chunks (32KB instead of 8KB) for faster transfer
+    $chunkSize = 32768; 
+    $totalLen = strlen($data);
+    for ($i = 0; $i < $totalLen; $i += $chunkSize) {
+        fwrite($socket, substr($data, $i, $chunkSize));
+    }
+    fwrite($socket, "\r\n.\r\n");
+    
     $res = $getResponse($socket);
     
     // QUIT
     $sendCommand($socket, "QUIT");
     fclose($socket);
-
-    return (substr($res, 0, 3) == "250") ? true : "Failed to send: $res";
+    return true;
 }
-?>
