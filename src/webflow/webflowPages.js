@@ -30,8 +30,6 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
       return `${WEBFLOW_PAGES_BASE}/career.html`
     case '/faq-page':
       return `${WEBFLOW_PAGES_BASE}/faq-page.html`
-    case '/our-team':
-      return `${WEBFLOW_PAGES_BASE}/our-team.html`
 
     case '/utility-pages/style-guide':
       return `${WEBFLOW_PAGES_BASE}/utility-pages/style-guide.html`

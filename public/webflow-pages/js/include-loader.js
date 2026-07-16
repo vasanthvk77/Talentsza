@@ -82,6 +82,16 @@
     }
     initConfig();
 
+    // Helper: File to Base64
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
+    }
+
     // 2. Global Form Submission Handler
     async function handleGlobalSubmit(e) {
         const form = e.target;
@@ -157,11 +167,40 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
 
+            // Construct JSON Payload
+            const payload = {
+                "Full-Name": formData.get('Full-Name'),
+                "Phone-Number": formData.get('Phone-Number'),
+                "Email-Address": formData.get('Email-Address'),
+                "Place": formData.get('Place'),
+                "Education": formData.get('Education'),
+                "Work-Preference": formData.get('Work-Preference'),
+                "Message": formData.get('Message') || formData.get('Comment'),
+            };
+
+            // Handle CV file if exists
+            if (cvFile && cvFile.name) {
+                payload.CV = {
+                    name: cvFile.name,
+                    type: cvFile.type,
+                    data: await fileToBase64(cvFile)
+                };
+            }
+
             // Send via PHP Serverless API
-            const response = await fetch('/api/send-email.php', {
+            const response = await fetch('/webflow-pages/api/send-email.php', {
                 method: 'POST',
-                body: formData // Send as multipart/form-data automatically
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
+
+            if (!response.ok) {
+                const text = await response.text();
+                console.error("Server Response Error:", text);
+                throw new Error(`Server error: ${response.status}`);
+            }
 
             const result = await response.json();
 

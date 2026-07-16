@@ -56,7 +56,27 @@ export function transformWebflowHtml(html) {
   out = out.replace(/example@pbmit\.com/g, 'info@talentsza.com')
   out = out.replace(/2972 Westheimer Rd\. Santa Ana, Illinoi/g, 'Coimbatore, Tamil Nadu, India')
   out = out.replace(/\+1-234-567-89/g, '+91-96266 26866')
+
+  // Make specific phone and email instances clickable in the UI
+  // This targets common Webflow class patterns for contact info
+  out = out.replace(
+    /<div class="team-data-text">\+91-96266 26866<\/div>/g,
+    '<div class="team-data-text"><a href="tel:+91-9626626866" style="color: inherit; text-decoration: none;">+91-96266 26866</a></div>'
+  )
+  out = out.replace(
+    /<div class="team-data-text">info@talentsza\.com<\/div>/g,
+    '<div class="team-data-text"><a href="mailto:info@talentsza.com" style="color: inherit; text-decoration: none;">info@talentsza.com</a></div>'
+  )
+
   out = out.replace(/Copyright © 2025/g, 'Copyright © 2026')
+
+  // Replace social link placeholders using global __SOCIAL_LINKS__
+  if (typeof __SOCIAL_LINKS__ !== 'undefined') {
+    out = out.replace(/{{VITE_FACEBOOK_URL}}/g, __SOCIAL_LINKS__.facebookUrl || '')
+    out = out.replace(/{{VITE_LINKEDIN_URL}}/g, __SOCIAL_LINKS__.linkedinUrl || '')
+    out = out.replace(/{{VITE_INSTAGRAM_URL}}/g, __SOCIAL_LINKS__.instagramUrl || '')
+    out = out.replace(/{{VITE_BLOG_URL}}/g, __SOCIAL_LINKS__.blogUrl || '')
+  }
 
   // Remove Webflow credits
   out = out.replace(/, Powered by\s*<a[^>]*><\/a>/gi, '')
@@ -135,7 +155,6 @@ export function transformWebflowHtml(html) {
     ['contact.html', '/contact'],
     ['career.html', '/career'],
     ['faq-page.html', '/faq-page'],
-    ['our-team.html', '/our-team'],
     ['404.html', '/404'],
   ]
 
