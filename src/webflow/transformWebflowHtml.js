@@ -155,7 +155,6 @@ export function transformWebflowHtml(html) {
     ['contact.html', '/contact'],
     ['career.html', '/career'],
     ['faq-page.html', '/faq-page'],
-    ['our-team.html', '/our-team'],
     ['404.html', '/404'],
   ]
 

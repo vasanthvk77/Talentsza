@@ -4,7 +4,6 @@ import WebflowPage from './webflow/WebflowPage'
 import { getWebflowHtmlUrl, loadWebflowHtml } from './webflow/webflowPages'
 import { LoadingProvider, useLoading } from './utils/LoadingContext'
 import LoadingScreen from './components/LoadingScreen'
-import AudioPlayer from './components/AudioPlayer'
 
 function WebflowRoute({ pathName, paramsKind }) {
   const { slug } = useParams()
@@ -85,7 +84,6 @@ function AppContent() {
   return (
     <>
       <LoadingScreen isVisible={isLoading} />
-      <AudioPlayer />
       <Routes>
         <Route path="/" element={<WebflowRoute pathName="/" />} />
         <Route path="/about-us" element={<WebflowRoute pathName="/about-us" />} />
@@ -104,7 +102,6 @@ function AppContent() {
         <Route path="/contact" element={<WebflowRoute pathName="/contact" />} />
         <Route path="/career" element={<WebflowRoute pathName="/career" />} />
         <Route path="/faq-page" element={<WebflowRoute pathName="/faq-page" />} />
-        <Route path="/our-team" element={<WebflowRoute pathName="/our-team" />} />
         
         <Route path="/utility-pages/style-guide" element={<WebflowRoute pathName="/utility-pages/style-guide" />} />
         <Route path="/utility-pages/licenses" element={<WebflowRoute pathName="/utility-pages/licenses" />} />
