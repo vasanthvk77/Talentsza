@@ -100,6 +100,7 @@ function AppContent() {
         <Route path="/post/role-soft-skills-career-2026" element={<WebflowRoute pathName="/post/role-soft-skills-career-2026" />} />
         
         <Route path="/contact" element={<WebflowRoute pathName="/contact" />} />
+        <Route path="/courses" element={<WebflowRoute pathName="/courses" />} />
         <Route path="/career" element={<WebflowRoute pathName="/career" />} />
         <Route path="/faq-page" element={<WebflowRoute pathName="/faq-page" />} />
         

@@ -26,6 +26,8 @@ export function getWebflowHtmlUrl(pathname, params = {}) {
       return `${WEBFLOW_PAGES_BASE}/blog.html`
     case '/contact':
       return `${WEBFLOW_PAGES_BASE}/contact.html`
+    case '/courses':
+      return `${WEBFLOW_PAGES_BASE}/courses.html`
     case '/career':
       return `${WEBFLOW_PAGES_BASE}/career.html`
     case '/faq-page':
